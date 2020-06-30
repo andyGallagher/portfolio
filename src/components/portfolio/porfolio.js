@@ -31,7 +31,6 @@ const PortfolioProjectList = styled.ul({
     listStyle: 'none',
 });
 
-
 const PortfolioProject = styled.li(({ isActive }) => {
     // If this is active, spread active style.
     const activeStyle = isActive ? LINK_HOVER_STYLE : {};
@@ -40,7 +39,7 @@ const PortfolioProject = styled.li(({ isActive }) => {
         '> a': {
             ...LINK_STYLE,
             ...activeStyle,
-        }
+        },
     };
 });
 
@@ -51,16 +50,14 @@ export const Portfolio = () => {
         let sto;
 
         const si = setInterval(() => {
-            setActiveIndex((activeIndex) => (
-                (activeIndex + 1) % TEST.length)
-            );
+            setActiveIndex((activeIndex) => (activeIndex + 1) % TEST.length);
         }, SLIDESHOW_TIME);
 
         return () => {
             if (si) {
                 clearInterval(si);
             }
-            
+
             if (sto) {
                 clearTimeout(sto);
             }
@@ -70,29 +67,23 @@ export const Portfolio = () => {
     return (
         <PortfolioSection>
             <PortfolioHeader>Recent Work</PortfolioHeader>
-            <Slideshow
-                activeIndex={activeIndex}
-            />
+            <Slideshow activeIndex={activeIndex} />
             <PortfolioProjectList>
-                {
-                    TEST.map(({
-                        title,
-                        technologies,
-                        href
-                    }, i) => (
-                        <PortfolioProject
-                            key={title}
-                            isActive={activeIndex === i}
-                        >
-                            <Link
-                                to={`/projects/${href}`}
+                {TEST.map(({ title, technologies, href }, i) => (
+                    <PortfolioProject key={title} isActive={activeIndex === i}>
+                        <Link to={`/projects/${href}`}>
+                            <span>{title}</span> →{' '}
+                            <span
+                                css={css`
+                                    font-style: italic;
+                                `}
                             >
-                                <span>{title}</span> → <span css={css`font-style: italic;`}>({technologies})</span>
-                            </Link>
-                        </PortfolioProject>
-                    ))    
-                }
+                                ({technologies})
+                            </span>
+                        </Link>
+                    </PortfolioProject>
+                ))}
             </PortfolioProjectList>
         </PortfolioSection>
-    )
+    );
 };
