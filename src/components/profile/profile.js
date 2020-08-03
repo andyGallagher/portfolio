@@ -1,24 +1,22 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import styled from '@emotion/styled';
 import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import styled from '@emotion/styled';
 import { Quote } from '../shared/quote';
-import * as pictures from './assets';
-import {
-    LINK_STYLE,
-    LINK_HOVER_STYLE,
-    GENERAL_FONT_SIZE,
-} from '../../styles/constants';
+import { LINK_STYLE } from '../../styles/constants';
 
-const ProfileLink = styled.a(LINK_STYLE);
+const ProfileLink = styled.a({
+    ...LINK_STYLE,
+    padding: 0,
+    lineHeight: '1.45rem',
+});
 
 export const Profile = () => {
     const data = useStaticQuery(graphql`
         query ProfilePictureQuery {
             file(relativePath: { eq: "profile.jpg" }) {
                 childImageSharp {
-                    # Specify the image processing specifications right in the query.
                     fluid {
                         aspectRatio
                         base64
@@ -37,12 +35,10 @@ export const Profile = () => {
                 padding: 50px 15% 50px;
             `}
         >
-            <Img
-                // src={pictures.square}
-                fluid={data.file.childImageSharp.fluid}
-                src={pictures.profile}
-            />
-            <Quote isPadded>“What you reap is what you sow.”</Quote>
+            <Img fluid={data.file.childImageSharp.fluid} />
+            <Quote isPadded extraSpacing>
+                “Water deeply, infrequently.” &mdash; ancient gardening proverb
+            </Quote>
 
             <div
                 css={css`

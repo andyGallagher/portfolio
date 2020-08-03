@@ -2,9 +2,9 @@
 import { useState, useEffect } from 'react';
 import { jsx, css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { useStaticQuery } from 'gatsby';
 import { Link } from '@reach/router';
 import { Slideshow, SLIDESHOW_TIME } from './slideshow';
-import { TEST } from './assets';
 import {
     LIGHT_GREY,
     LINK_STYLE,
@@ -44,13 +44,30 @@ const PortfolioProject = styled.li(({ isActive }) => {
 });
 
 export const Portfolio = () => {
+    const data = useStaticQuery(graphql`
+        query SelectPortfolio2 {
+            allProjectsJson {
+                edges {
+                    node {
+                        title
+                        technologies
+                        href
+                    }
+                }
+            }
+        }
+    `);
+
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         let sto;
 
         const si = setInterval(() => {
-            setActiveIndex((activeIndex) => (activeIndex + 1) % TEST.length);
+            setActiveIndex(
+                (activeIndex) =>
+                    (activeIndex + 1) % data.allProjectsJson.edges.length
+            );
         }, SLIDESHOW_TIME);
 
         return () => {
@@ -69,20 +86,25 @@ export const Portfolio = () => {
             <PortfolioHeader>Recent Work</PortfolioHeader>
             <Slideshow activeIndex={activeIndex} />
             <PortfolioProjectList>
-                {TEST.map(({ title, technologies, href }, i) => (
-                    <PortfolioProject key={title} isActive={activeIndex === i}>
-                        <Link to={`/projects/${href}`}>
-                            <span>{title}</span> →{' '}
-                            <span
-                                css={css`
-                                    font-style: italic;
-                                `}
-                            >
-                                ({technologies})
-                            </span>
-                        </Link>
-                    </PortfolioProject>
-                ))}
+                {data.allProjectsJson.edges.map(
+                    ({ node: { title, technologies, href } }, i) => (
+                        <PortfolioProject
+                            key={title}
+                            isActive={activeIndex === i}
+                        >
+                            <Link to={`/${href}`}>
+                                <span>{title}</span> →{' '}
+                                <span
+                                    css={css`
+                                        font-style: italic;
+                                    `}
+                                >
+                                    ({technologies})
+                                </span>
+                            </Link>
+                        </PortfolioProject>
+                    )
+                )}
             </PortfolioProjectList>
         </PortfolioSection>
     );

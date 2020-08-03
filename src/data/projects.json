@@ -1,0 +1,41 @@
+[
+    {
+        "title": "Barnes Contactless Ticketing for Temi",
+        "technologies": "Figma, Kotlin",
+        "href": "contactless-ticketing",
+        "src": "./assets/contactlessTicketing.jpg",
+        "text": "Figma sketch of Contactless Ticketing prototype for Temi robot."
+    },
+    {
+        "title": "Barnes Online Collection — Revisions",
+        "technologies": "React, JavaScript, Redux",
+        "href": "collection",
+        "srcName": "collection",
+        "text": "Collection site detail for “Jacques Lipschitz — Bather”.",
+        "isVideo": true
+    },
+    {
+        "title": "Barnes IIIF Deep Viewer",
+        "technologies": "React, TypeScript",
+        "href": "deep-viewer",
+        "srcName": "deepViewer",
+        "text": "Examining a detail of “Unknown Artist, Hieronymus Bosch — Christ Mocked” with the Barnes IIIF Deep Viewer.",
+        "isVideo": true
+    },
+    {
+        "title": "Barnes WWW — Revisions",
+        "technologies": "Twig, JavaScript",
+        "href": "www",
+        "srcName": "www",
+        "text": "Searching for paintings by Henri Rousseau using the updated search feature on the Barnes' flagship site.",
+        "isVideo": true
+    },
+    {
+        "title": "Barnes Twitch pollma.pe Skin",
+        "technologies": "SCSS",
+        "href": "twitch",
+        "src": "./assets/twitch.jpg",
+        "text": "HTML mock-up for Barnes twitch polling dialog.",
+        "isTall": true
+    }
+]
