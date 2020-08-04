@@ -1,16 +1,16 @@
 /** @jsx jsx */
-import { jsx, keyframes }from '@emotion/core'
+import { jsx, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
-import { GENERAL_FONT_SIZE } from '../styles/constants'; 
+import { GENERAL_FONT_SIZE } from '../styles/constants';
 
 const HeaderSection = styled.section({
     color: '#fff',
     backgroundColor: '#000',
-    
+
     fontSize: `${GENERAL_FONT_SIZE}rem`,
     lineHeight: `${GENERAL_FONT_SIZE * 1.4}rem`,
 
-    padding: '10px 15px',
+    padding: '15px',
     position: 'relative',
 });
 
@@ -26,16 +26,12 @@ const blinkAnimation = keyframes`
     }
 `;
 
-const HeaderParagraph = styled.p(({
-    marginTop,
-    marginBottom,
-    blink
-}) => ({
+const HeaderParagraph = styled.p(({ marginTop, marginBottom, blink }) => ({
     margin: 0,
     marginTop: marginTop && '15px',
     marginBottom: marginBottom && '15px',
-    
-    ":after": blink && {
+
+    ':after': blink && {
         display: 'inline-block',
         content: '" "',
         backgroundColor: 'white',
@@ -45,17 +41,16 @@ const HeaderParagraph = styled.p(({
         marginTop: '6px',
         position: 'absolute',
         animation: `${blinkAnimation} 1s infinite`,
-    }
+    },
 }));
 
 export const Header = () => (
     <HeaderSection>
-        <HeaderParagraph
-            blink={true}
-        >
-            Andrew Gallagher is a Philadelphia based software developer.
-            He currently works as a front end developer at the Barnes Foundation.
-            He develops web sites (React → TypeScript / JavaScript, BEM → SCSS) and native applications (Android → Kotlin, iOS → React Native).
+        <HeaderParagraph blink={true}>
+            Andrew Gallagher is a Philadelphia based software developer. He
+            currently works as a front end developer at the Barnes Foundation.
+            He develops web sites (React → TypeScript / JavaScript, BEM → SCSS)
+            and native applications (Android → Kotlin, iOS → React Native).
         </HeaderParagraph>
     </HeaderSection>
 );

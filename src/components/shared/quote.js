@@ -2,9 +2,9 @@
 import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 
-const QuoteSpan = styled.span(({ isPadded, extraSpacing }) => ({
+const QuoteSpan = styled.span(({ isPadded, extraSpacing, notCentered }) => ({
     fontSize: '0.8rem',
-    textAlign: 'center',
+    textAlign: !notCentered && 'center',
     display: 'block',
     width: '100%',
     padding: isPadded ? '15px 20px 0' : '15px 0',

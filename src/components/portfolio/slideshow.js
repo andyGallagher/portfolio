@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { useState, useEffect, useRef } from 'react'; // Not sure why this is needed, but it is...
-import { useStaticQuery } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import { jsx, css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -16,16 +16,40 @@ const slideshowAssetStyle = {
     boxSizing: 'border-box',
 };
 
-const SlideshowVideo = styled.video(({ isTall }) => ({
+export const SlideshowWrapper = styled.div`
+    height: ${(props) => (props.static ? 'auto' : '300px')};
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid ${GREY};
+    border-top: 1px solid ${GREY};
+`;
+
+export const SlideshowVideo = styled.video(({ isTall }) => ({
     ...slideshowAssetStyle,
     height: isTall && '200px',
 }));
+
+export const SlideshowImage = ({ isTall, ...rest }) => (
+    <Img
+        css={{
+            ...slideshowAssetStyle,
+            width: isTall && '50%',
+            marginLeft: isTall && 'auto',
+            marginRight: isTall && 'auto',
+        }}
+        {...rest}
+    />
+);
 
 export const Slideshow = ({ activeIndex }) => {
     const isInit = useRef(false);
 
     const data = useStaticQuery(graphql`
-        query SelectPortfolio {
+        {
             allProjectsJson {
                 edges {
                     node {
@@ -112,19 +136,7 @@ export const Slideshow = ({ activeIndex }) => {
                 }
             `}
         >
-            <div
-                css={css`
-                    height: 300px;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    position: relative;
-                    border-bottom: 1px solid ${GREY};
-                    border-top: 1px solid ${GREY};
-                `}
-            >
+            <SlideshowWrapper>
                 {data.allProjectsJson.edges.map(
                     ({ node: { text, src, isVideo, isTall, srcName } }, i) => {
                         const isActive = activeIndex === i;
@@ -156,14 +168,9 @@ export const Slideshow = ({ activeIndex }) => {
                                             isTall={isTall}
                                         />
                                     ) : (
-                                        <Img
+                                        <SlideshowImage
                                             fluid={src.childImageSharp.fluid}
-                                            css={{
-                                                ...slideshowAssetStyle,
-                                                width: isTall && '50%',
-                                                marginLeft: isTall && 'auto',
-                                                marginRight: isTall && 'auto',
-                                            }}
+                                            isTall={isTall}
                                         />
                                     )}
                                 </div>
@@ -181,7 +188,7 @@ export const Slideshow = ({ activeIndex }) => {
                         );
                     }
                 )}
-            </div>
+            </SlideshowWrapper>
         </Link>
     );
 };

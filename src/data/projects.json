@@ -4,7 +4,32 @@
         "technologies": "Figma, Kotlin",
         "href": "contactless-ticketing",
         "src": "./assets/contactlessTicketing.jpg",
-        "text": "Figma sketch of Contactless Ticketing prototype for Temi robot."
+        "text": "Figma sketch of Contactless Ticketing prototype for Temi robot.",
+        "description": [
+            {
+                "p": "The Barnes closed to the public in late March due to COVID-19.  As part of the reopening plan in late July, we developed an automated capacity management system to make sure that we were compliant with Philadelphia's venue guidelines."
+            },
+            {
+                "p": "As part of this initiative, I developed the visitor-facing Android application that scans barcodes and ushers users into the Barnes.  Designs were outlined in Figma and written up in Kotlin over the course of 3 weeks while the node.js server was built concurrently by our lead, Chris."
+            },
+            {
+                "p": "Compile times were really the only dark spot on this whole project — the SDK we were developing on was unfortunately one level before Android started including HMR. ☹"
+            },
+            {
+                "img": {
+                    "src": "./assets/contactlessTicketing__josh.jpg",
+                    "alt": "Josh scans in a ticket.",
+                    "quote": "Josh, the head of Visitor Services at the Barnes, scans in the inaugural ticket in late July."
+                }
+            },
+            {
+                "img": {
+                    "src": "./assets/contactlessTicketing__me.jpg",
+                    "alt": "Testing out the Temi under poor network conditions.",
+                    "quote": "Testing out the Temi under poor network conditions (on vacation at the Jersey shore)."
+                }
+            }
+        ]
     },
     {
         "title": "Barnes Online Collection — Revisions",
@@ -12,7 +37,12 @@
         "href": "collection",
         "srcName": "collection",
         "text": "Collection site detail for “Jacques Lipschitz — Bather”.",
-        "isVideo": true
+        "isVideo": true,
+        "description": [
+            {
+                "p": "Lorem ipsum"
+            }
+        ]
     },
     {
         "title": "Barnes IIIF Deep Viewer",
@@ -20,15 +50,15 @@
         "href": "deep-viewer",
         "srcName": "deepViewer",
         "text": "Examining a detail of “Unknown Artist, Hieronymus Bosch — Christ Mocked” with the Barnes IIIF Deep Viewer.",
-        "isVideo": true
-    },
-    {
-        "title": "Barnes WWW — Revisions",
-        "technologies": "Twig, JavaScript",
-        "href": "www",
-        "srcName": "www",
-        "text": "Searching for paintings by Henri Rousseau using the updated search feature on the Barnes' flagship site.",
-        "isVideo": true
+        "isVideo": true,
+        "description": [
+            {
+                "p": "Interesting one — wrote largely around the OpenSeaDragon library which manages images tiled in a specific directory structure (!!)."
+            },
+            {
+                "p": "A bit of monkey patching was needed here — actual modifying library prototypes — to get this to work with the version of tiles that we had versus what OpenSeaDragon would \"accept\".  We basically decided to just settle on the nasty hack as this was needed for some digital classes ASAP and computing new tiles would be A) expensive and B) take too much time.  When perfect isn't available, good enough will suffice!"
+            }
+        ]
     },
     {
         "title": "Barnes Twitch pollma.pe Skin",
@@ -36,6 +66,27 @@
         "href": "twitch",
         "src": "./assets/twitch.jpg",
         "text": "HTML mock-up for Barnes twitch polling dialog.",
-        "isTall": true
+        "isTall": true,
+        "description": [
+            {
+                "p": "Super quick, under 1 hour SCSS mish-mash of Barnes style.  This style skin was drawn up for classes that the Barnes were giving for pre-K kids during the beginning of quarantine."
+            },
+            {
+                "p": "It's really wild to work at a place for long enough that you begin to understand company style in an intuitive way.  I felt the need to include this just as it was maybe the first thing I wrote blind that really had a true LAF of the Barnes digital experience."
+            }
+        ]
+    },
+    {
+        "title": "Barnes WWW — Revisions",
+        "technologies": "Twig, JavaScript",
+        "href": "www",
+        "srcName": "www",
+        "text": "Searching for paintings by Henri Rousseau using the updated search feature on the Barnes' flagship site.",
+        "isVideo": true,
+        "description": [
+            {
+                "p": "Lorem ipsum"
+            }
+        ]
     }
 ]

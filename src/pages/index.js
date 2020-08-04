@@ -6,10 +6,7 @@ import { Portfolio } from '../components/portfolio/portfolio';
 import { Profile } from '../components/profile/profile';
 import '../styles/style.css';
 
-const FlexContainer = styled.div({
-    // display: 'flex',
-    flexDirection: 'column',
-});
+const FlexContainer = styled.div({ flexDirection: 'column' });
 
 export default () => {
     return (

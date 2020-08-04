@@ -72,6 +72,22 @@ export const Profile = () => {
                         <span>andrewtgallagherJS@gmail.com</span>
                     </ProfileLink>
                 </span>
+
+                <span
+                    css={css`
+                        display: block;
+                        white-space: nowrap;
+                    `}
+                >
+                    Github →&nbsp;
+                    <ProfileLink href="https://github.com/agallagher777">
+                        <span>Work</span>
+                    </ProfileLink>{' '}
+                    |{' '}
+                    <ProfileLink href="https://github.com/corbaciBay">
+                        <span>Personal</span>
+                    </ProfileLink>
+                </span>
             </div>
         </section>
     );

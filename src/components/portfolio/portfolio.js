@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { useState, useEffect } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
 import { jsx, css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { useStaticQuery } from 'gatsby';
 import { Link } from '@reach/router';
 import { Slideshow, SLIDESHOW_TIME } from './slideshow';
 import {
@@ -11,14 +11,14 @@ import {
     LINK_HOVER_STYLE,
 } from '../../styles/constants';
 
-const PortfolioSection = styled.main({
+export const PortfolioSection = styled.main({
     flexGrow: 1,
     color: 'black',
     backgroundColor: LIGHT_GREY,
-    padding: '10px 15px 30px',
+    padding: '15px',
 });
 
-const PortfolioHeader = styled.h1({
+export const PortfolioHeader = styled.h1({
     fontSize: '1.8rem',
     margin: 0,
     paddingBottom: '10px',
@@ -45,7 +45,7 @@ const PortfolioProject = styled.li(({ isActive }) => {
 
 export const Portfolio = () => {
     const data = useStaticQuery(graphql`
-        query SelectPortfolio2 {
+        {
             allProjectsJson {
                 edges {
                     node {
@@ -79,7 +79,7 @@ export const Portfolio = () => {
                 clearTimeout(sto);
             }
         };
-    }, []);
+    }, [data.allProjectsJson.edges.length]);
 
     return (
         <PortfolioSection>
