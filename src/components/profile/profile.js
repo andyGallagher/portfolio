@@ -80,11 +80,19 @@ export const Profile = () => {
                     `}
                 >
                     Github →&nbsp;
-                    <ProfileLink href="https://github.com/agallagher777">
+                    <ProfileLink
+                        href="https://github.com/agallagher777"
+                        target="blank"
+                        rel="noopener noreferrer"
+                    >
                         <span>Work</span>
                     </ProfileLink>{' '}
                     |{' '}
-                    <ProfileLink href="https://github.com/corbaciBay">
+                    <ProfileLink
+                        href="https://github.com/corbaciBay"
+                        target="blank"
+                        rel="noopener noreferrer"
+                    >
                         <span>Personal</span>
                     </ProfileLink>
                 </span>
