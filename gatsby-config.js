@@ -6,11 +6,14 @@
 // const siteAddress = new URL("http://www.xn--andrews-portfolio--p23m.ml")
 
 module.exports = {
-    /* Your site config here */
+    siteMetadata: {
+        title: `Andrew Gallagher → Portfolio`,
+    },
     plugins: [
         'gatsby-plugin-sharp',
         'gatsby-transformer-sharp',
         'gatsby-transformer-json',
+        'gatsby-plugin-emotion',
         {
             resolve: 'gatsby-source-filesystem',
             options: {

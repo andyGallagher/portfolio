@@ -17,6 +17,7 @@ export const Project = ({
     text,
     technologies,
     description,
+    links,
 }) => {
     return (
         <PortfolioSection>
@@ -63,6 +64,12 @@ export const Project = ({
 
                     a: {
                         ...LINK_STYLE,
+                        padding: 0,
+                        lineHeight: 'inherit',
+                    },
+
+                    '& .back': {
+                        ...LINK_STYLE,
                         paddingTop: 0,
                     },
 
@@ -81,14 +88,37 @@ export const Project = ({
                         padding-bottom: 10px;
                     `}
                 >
-                    <Link to="/">← Back</Link>
+                    <Link className="back" to="/">
+                        ← Back to home
+                    </Link>
                 </div>
-                {description.map((child) => {
-                    console.log(child);
-
+                {Boolean(links && links.length) && (
+                    <div
+                        css={css`
+                            padding-bottom: 0.4em;
+                        `}
+                    >
+                        <strong>External links and press: </strong>
+                        <ul>
+                            {links.map(({ title, href }, i) => (
+                                <li key={i}>
+                                    <a
+                                        href={href}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                    >
+                                        {title}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+                {description.map((child, i) => {
                     if (child.p) {
                         return (
                             <p
+                                key={i}
                                 dangerouslySetInnerHTML={{
                                     __html: child.p,
                                 }}
@@ -98,7 +128,7 @@ export const Project = ({
 
                     if (child.img) {
                         return (
-                            <div>
+                            <div key={i}>
                                 <div
                                     css={css`
                                         width: 80%;

@@ -19,6 +19,10 @@ export const query = graphql`
                     isTall
                     srcName
                     technologies
+                    links {
+                        title
+                        href
+                    }
                     description {
                         p
                         img {
