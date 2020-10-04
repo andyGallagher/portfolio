@@ -1,12 +1,10 @@
 /** @jsx jsx */
-import { graphql } from 'gatsby';
-import { jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import { Header } from '../components/header';
-import { Project } from '../components/portfolio/project';
-import '../styles/style.css';
-
-const FlexContainer = styled.div({ flexDirection: 'column' });
+import { graphql } from "gatsby";
+import { jsx } from "@emotion/core";
+import { SiteWrapper } from "../components/siteWrapper";
+import { FlexContainer } from "../styles/components/flexContainer";
+import { Project } from "../components/project";
+import "../assets/scss/styles.scss";
 
 export const query = graphql`
     query($slug: String!) {
@@ -16,7 +14,6 @@ export const query = graphql`
                     title
                     text
                     isVideo
-                    isTall
                     srcName
                     technologies
                     links {
@@ -60,13 +57,10 @@ export const query = graphql`
     }
 `;
 
-export default ({ data }) => {
-    console.log(data);
-
-    return (
+export default ({ data }) => (
+    <SiteWrapper>
         <FlexContainer>
-            <Header />
             <Project {...data.allProjectsJson.edges[0].node} />
         </FlexContainer>
-    );
-};
+    </SiteWrapper>
+);

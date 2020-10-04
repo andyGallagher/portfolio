@@ -1,19 +1,19 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import { Header } from '../components/header';
-import { Portfolio } from '../components/portfolio/portfolio';
-import { Profile } from '../components/profile/profile';
-import '../styles/style.css';
-
-const FlexContainer = styled.div({ flexDirection: 'column' });
+import { jsx } from "@emotion/core";
+import { SiteWrapper } from "../components/siteWrapper";
+import { Header } from "../components/header";
+import { Work } from "../components/work";
+import { Profile } from "../components/profile";
+import { FlexContainer } from "../styles/components/flexContainer";
 
 export default () => {
     return (
-        <FlexContainer>
-            <Header />
-            <Portfolio />
-            <Profile />
-        </FlexContainer>
+        <SiteWrapper>
+            <FlexContainer>
+                <Header />
+                <Work />
+                <Profile />
+            </FlexContainer>
+        </SiteWrapper>
     );
 };

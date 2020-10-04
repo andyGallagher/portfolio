@@ -1,0 +1,184 @@
+$font-path: "../fonts/";
+$lunch-type-path: $font-path + "lunchtype/";
+$wremena-type-path: $font-path + "wremena/";
+
+/////////////////
+// Lunchtype22 //
+/////////////////
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: normal;
+
+    src: url($lunch-type-path + "lunchtype22-light-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype22-light-webfont.woff") format("woff");
+}
+
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+
+    src: url($lunch-type-path + "lunchtype22-regular-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype22-regular-webfont.woff")
+            format("woff");
+}
+
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+
+    src: url($lunch-type-path + "lunchtype22-medium-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype22-medium-webfont.woff") format("woff");
+}
+
+/////////////////
+// Lunchtype23 //
+/////////////////
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 100;
+    font-style: italic;
+    font-stretch: normal;
+
+    src: url($lunch-type-path + "lunchtype23-light-italic-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype23-light-italic-webfont.woff")
+            format("woff");
+}
+
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 400;
+    font-style: italic;
+    font-stretch: normal;
+
+    src: url($lunch-type-path + "lunchtype23-regular-italic-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype23-regular-italic-webfont.woff")
+            format("woff");
+}
+
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 700;
+    font-style: italic;
+    font-stretch: normal;
+
+    src: url($lunch-type-path + "lunchtype23-medium-italic-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype23-medium-italic-webfont.woff")
+            format("woff");
+}
+
+/////////////////
+// Lunchtype24 //
+/////////////////
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: expanded;
+
+    src: url($lunch-type-path + "lunchtype24-light-expanded-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype24-light-expanded-webfont.woff")
+            format("woff");
+}
+
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: expanded;
+
+    src: url($lunch-type-path + "lunchtype24-regular-expanded-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype24-regular-expanded-webfont.woff")
+            format("woff");
+}
+
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: expanded;
+
+    src: url($lunch-type-path + "lunchtype24-medium-expanded-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype24-medium-expanded-webfont.woff")
+            format("woff");
+}
+
+/////////////////
+// Lunchtype25 //
+/////////////////
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: condensed;
+
+    src: url($lunch-type-path + "lunchtype25-light_condensed-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype25-light_condensed-webfont.woff")
+            format("woff");
+}
+
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: condensed;
+
+    src: url($lunch-type-path + "lunchtype25-regular_condensed-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype25-regular_condensed-webfont.woff")
+            format("woff");
+}
+
+@font-face {
+    font-family: Lunchtype;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: condensed;
+
+    src: url($lunch-type-path + "lunchtype25-medium-condensed-webfont.woff2")
+            format("woff2"),
+        url($lunch-type-path + "lunchtype25-medium-condensed-webfont.woff")
+            format("woff");
+}
+
+/////////////////
+//// Wremena ////
+/////////////////
+@font-face {
+    font-family: Wremena;
+    font-weight: 100;
+    font-style: normal;
+
+    src: url($wremena-type-path + "WremenaLight.woff") format("woff");
+}
+
+@font-face {
+    font-family: Wremena;
+    font-weight: 400;
+    font-style: normal;
+
+    src: url($wremena-type-path + "WremenaRegular.woff") format("woff");
+}
+
+@font-face {
+    font-family: Wremena;
+    font-weight: 700;
+    font-style: normal;
+
+    src: url($wremena-type-path + "WremenaBold.woff") format("woff");
+}

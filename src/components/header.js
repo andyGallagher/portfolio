@@ -1,56 +1,59 @@
 /** @jsx jsx */
-import { jsx, keyframes } from '@emotion/core';
-import styled from '@emotion/styled';
-import { GENERAL_FONT_SIZE } from '../styles/constants';
+/* eslint-disable jsx-a11y/accessible-emoji */
+import { jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import { fontSize } from "../styles/variables";
+import { breakpoints } from "../styles/breakpoints";
+import { Mission } from "../styles/components/mission";
+import { Interrupt } from "../styles/components/interrupt";
+import { NoOrphan } from "../styles/components/noOrphan";
 
-const HeaderSection = styled.section({
-    color: '#fff',
-    backgroundColor: '#000',
+const Subheader = styled.h2(
+    breakpoints({
+        fontSize: fontSize.subheader,
+        lineHeight: 1.45,
+        letterSpacing: 1.1,
+        fontWeight: 400,
 
-    fontSize: `${GENERAL_FONT_SIZE}rem`,
-    lineHeight: `${GENERAL_FONT_SIZE * 1.4}rem`,
-
-    padding: '15px',
-    position: 'relative',
-});
-
-const blinkAnimation = keyframes`
-    0% {
-        opacity: 0;
-    }
-    69% {
-        opacity: 0;
-    }
-    70% {
-        opacity: 1;
-    }
-`;
-
-const HeaderParagraph = styled.p(({ marginTop, marginBottom, blink }) => ({
-    margin: 0,
-    marginTop: marginTop && '15px',
-    marginBottom: marginBottom && '15px',
-
-    ':after': blink && {
-        display: 'inline-block',
-        content: '" "',
-        backgroundColor: 'white',
-        height: '20px',
-        width: '8px',
-        marginLeft: '5px',
-        marginTop: '6px',
-        position: 'absolute',
-        animation: `${blinkAnimation} 1s infinite`,
-    },
-}));
+        margin: "0 0 45px",
+        width: [undefined, "65%"],
+    })
+);
 
 export const Header = () => (
-    <HeaderSection>
-        <HeaderParagraph blink={true}>
-            Andrew Gallagher is a Philadelphia based software developer. He
-            currently works as a front end developer at the Barnes Foundation.
-            He develops web sites (React → TypeScript / JavaScript, BEM → SCSS)
-            and native applications (Android → Kotlin, iOS → React Native).
-        </HeaderParagraph>
-    </HeaderSection>
+    <header>
+        {/** Mission Statement */}
+        <Mission>
+            I'm an interdisciplinary{" "}
+            <NoOrphan>
+                <Interrupt>UI/UX developer</Interrupt> 👨🏻‍💻{" "}
+            </NoOrphan>
+            and{" "}
+            <NoOrphan>
+                <Interrupt>designer</Interrupt> 💅🏻
+            </NoOrphan>{" "}
+            from <NoOrphan>Philly. 🏙</NoOrphan> Right now, I work as a{" "}
+            <Interrupt>front end dev</Interrupt> at the Barnes Foundation — an{" "}
+            art <NoOrphan>museum 🎨</NoOrphan> in town. I{" "}
+            <NoOrphan>design ✨</NoOrphan> and <NoOrphan>write ✍🏻</NoOrphan>{" "}
+            software to solve people's problems.
+        </Mission>
+
+        {/** Sub-header */}
+        <Subheader>
+            I use a range of client-side technologies, like{" "}
+            <NoOrphan>
+                <Interrupt small>React</Interrupt> ⚛️
+            </NoOrphan>{" "}
+            or <Interrupt small>Vue</Interrupt> for the{" "}
+            <NoOrphan>‘net, 🌐</NoOrphan> <Interrupt small>Kotlin</Interrupt>{" "}
+            for <NoOrphan>Android 🤖,</NoOrphan> or{" "}
+            <Interrupt small>React Native</Interrupt> for{" "}
+            <NoOrphan>iOS. 🍏</NoOrphan> That said, my{" "}
+            <NoOrphan>portfolio 🗂</NoOrphan> is largely what I{" "}
+            <NoOrphan>love 💕</NoOrphan> to do most: creating maintainable,
+            extensible React web applications written in{" "}
+            <Interrupt small>TypeScript</Interrupt>.
+        </Subheader>
+    </header>
 );
