@@ -11,7 +11,7 @@ import { NoOrphan } from "../styles/components/noOrphan";
 const Subheader = styled.h2(
     breakpoints({
         fontSize: fontSize.subheader,
-        lineHeight: 1.45,
+        lineHeight: [1.25, 1.45],
         letterSpacing: 1.1,
         fontWeight: 400,
 
