@@ -139,9 +139,10 @@ export const Work = () => {
                                             <video
                                                 css={workImageCss}
                                                 src={videos[srcName]}
-                                                muted={true}
-                                                loop={true}
-                                                autoPlay={true}
+                                                muted
+                                                loop
+                                                autoPlay
+                                                playsInline
                                             />
                                         ) : (
                                             <Img

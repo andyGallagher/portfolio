@@ -55,10 +55,10 @@ const ProjectFrame = styled.div({
 
     border: `4px double rgba(${color.primary.rgb}, 0.4)`,
 
-    "& > span": {
+    "& > div": {
         maxWidth: 400,
         borderTop: `2px dotted rgba(${color.primary.rgb}, 0.4)`,
-        padding: 20,
+        padding: "0 20px",
     },
 });
 
@@ -146,9 +146,10 @@ export const Project = ({
                         <video
                             css={workImageCss}
                             src={videos[srcName]}
-                            muted={true}
-                            loop={true}
-                            autoPlay={true}
+                            muted
+                            loop
+                            autoPlay
+                            playsInline
                         />
                     ) : (
                         <Img
@@ -156,7 +157,9 @@ export const Project = ({
                             fluid={src.childImageSharp.fluid}
                         />
                     )}
-                    <Quote notCentered>{text}</Quote>
+                    <div>
+                        <Quote notCentered>{text}</Quote>
+                    </div>
                 </ProjectFrame>
 
                 {/** Links */}

@@ -32,7 +32,7 @@ export const Header = () => (
             <NoOrphan>
                 <Interrupt>designer</Interrupt> 💅🏻
             </NoOrphan>{" "}
-            from <NoOrphan>Philly. 🏙</NoOrphan> Right now, I work as a{" "}
+            from Philly. Right now, I work as a{" "}
             <Interrupt>front end dev</Interrupt> at the Barnes Foundation — an{" "}
             art <NoOrphan>museum 🎨</NoOrphan> in town. I{" "}
             <NoOrphan>design ✨</NoOrphan> and <NoOrphan>write ✍🏻</NoOrphan>{" "}
@@ -47,7 +47,7 @@ export const Header = () => (
             </NoOrphan>{" "}
             or <Interrupt small>Vue</Interrupt> for the{" "}
             <NoOrphan>‘net, 🌐</NoOrphan> <Interrupt small>Kotlin</Interrupt>{" "}
-            for <NoOrphan>Android 🤖,</NoOrphan> or{" "}
+            for <NoOrphan>Android, 🤖</NoOrphan> or{" "}
             <Interrupt small>React Native</Interrupt> for{" "}
             <NoOrphan>iOS. 🍏</NoOrphan> That said, my{" "}
             <NoOrphan>portfolio 💼</NoOrphan> is largely dedicated to what I{" "}

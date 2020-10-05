@@ -19,7 +19,7 @@ export const SiteMetaData = () => (
         <meta name="geo.placename" content={config.meta.placeName} />
 
         {/* #TODO => Add IMAGE */}
-        {/* <meta property="og:image" content={metaImage} /> */}
+        <meta property="og:image" content="./thumbnail.png" />
 
         <meta property="og:url" content={config.meta.canonicalUrl} />
         <link rel="canonical" href={config.meta.canonicalUrl} />

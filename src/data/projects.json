@@ -158,7 +158,7 @@
         "href": "membership",
         "isVideo": true,
         "srcName": "membership",
-        "text": "",
+        "text": "Checking out a few tabs in our Membership Experience application.",
         "description": [
             {
                 "p": "After reopening after quarantine, 😷 we wanted to make a membership portal at the Barnes for a more contactless 🙌 experience for our guests.  This application offers convenient methods for a member to purchase tickets, display their membership card, and see updates from the Barnes via Firebase 🔥 notifications. "
