@@ -10,7 +10,7 @@ export const Interrupt = styled.strong(({ small }) =>
         fontWeight: 700,
         textTransform: "uppercase",
         borderBottom: `${small ? 7 : 12}px solid rgba(${
-            color.primary.rgb
+            color.hilight.rgb
         }, .45)`,
         height: "4px",
         lineHeight: "4px",

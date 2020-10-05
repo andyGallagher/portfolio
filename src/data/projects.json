@@ -1,40 +1,5 @@
 [
     {
-        "title": "Barnes Contactless Ticketing for Temi",
-        "technologies": "Figma, Kotlin",
-        "href": "contactless-ticketing",
-        "src": "./assets/contactlessTicketing.jpg",
-        "text": "Figma sketch of Contactless Ticketing prototype for Temi robot.",
-        "links": [
-            {
-                "title": "NBC Philly — Press",
-                "href": "https://www.nbcphiladelphia.com/entertainment/philly-live/barnes-foundation-welcomes-back-visitors-with-safety-measures-in-place/2485508/"
-            }
-        ],
-        "description": [
-            {
-                "p": "The Barnes closed to the public in late March due to COVID-19.  As part of the reopening plan in late July, we developed an automated capacity management system to make sure that we were compliant with <a href=\"https://www.barnesfoundation.org/covid-19\" target=\"_blank\" rel=\"noopener noreferrer\">Philadelphia's venue guidelines</a>."
-            },
-            {
-                "p": "As part of this initiative, I developed the visitor-facing Android application that scans barcodes and ushers users into the Barnes.  Designs were outlined in Figma and written up in Kotlin over the course of 3 weeks while the node.js server was built concurrently by our lead, Chris."
-            },
-            {
-                "img": {
-                    "src": "./assets/contactlessTicketing__josh.jpg",
-                    "alt": "Josh scans in a ticket.",
-                    "quote": "Josh, the head of Visitor Services at the Barnes, scans in the inaugural ticket in late July."
-                }
-            },
-            {
-                "img": {
-                    "src": "./assets/contactlessTicketing__me.jpg",
-                    "alt": "Testing out the Temi under poor network conditions.",
-                    "quote": "Testing out the Temi under poor network conditions (on vacation at the Jersey shore)."
-                }
-            }
-        ]
-    },
-    {
         "title": "Barnes Online Collection — Revisions",
         "technologies": "React, JavaScript, Redux",
         "href": "collection",
@@ -57,7 +22,7 @@
         ],
         "description": [
             {
-                "p": "Redesigned the Barnes' collection page to match some killer designs from <a href=\"https://area17.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Area17</a>.  Amazingly talented crew over there, the designs here were so strong that it was really just making it mirror-up to the px."
+                "p": "Redesigned the Barnes' collection page to match some killer designs from <a href=\"https://area17.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Area17</a>.  Amazingly talented crew over there, the designs here were so strong 💪 that it was really just making it mirror-up to the px."
             },
             {
                 "p": "Side note: this redesign exposed me to an old but <a href=\"https://github.com/BarnesFoundation/Barnes-Online-Collection/blob/master/src/components-barnes-toolkit/scss/setup/mixins/_breakpoint.scss\" target=\"_blank\" rel=\"noopener noreferrer\">incredibly clever breakpoint mixin</a> that I still crib to this day!"
@@ -65,19 +30,23 @@
         ]
     },
     {
-        "title": "Barnes IIIF Deep Viewer",
-        "technologies": "React, TypeScript",
-        "href": "deep-viewer",
-        "srcName": "deepViewer",
-        "text": "Examining a detail of “Unknown Artist, Hieronymus Bosch — Christ Mocked” with the Barnes IIIF Deep Viewer.",
-        "isVideo": true,
-        "links": [],
+        "title": "Robotic Imaging WWW",
+        "technologies": "Gatsby, AWS, GraphQL",
+        "href": "robotic-imaging",
+        "src": "./assets/roboticImaging.jpg",
+        "links": [
+            {
+                "title": "Site",
+                "href": "https://www.roboticimaging.io/"
+            }
+        ],
+        "text": "Header from landing page of Robotic Imaging site.",
         "description": [
             {
-                "p": "Written largely around the <a href=\"https://github.com/openseadragon/openseadragon\" target=\"_blank\" rel=\"noopener noreferrer\">OpenSeaDragon library</a> which manages images tiled in a specific directory structure."
+                "p": "Designed and developed the company website for Robotic Imaging, a construction 👷‍♀️ technology company here in Philadelphia.  The site was built using Gatsby and SCSS; site data is sourced from the company's WordPress and Instagram. 📸"
             },
             {
-                "p": "This project was eventually included in our collection site, although a bit of monkey patching was needed here — <a href=\"https://github.com/BarnesFoundation/Barnes-Online-Collection/blob/development_redesign_frontend/src/components/Zoom/Zoom.jsx#L11-L15\" target=\"_blank\" rel=\"noopener noreferrer\">actual modifying library prototypes</a>. This was necessary in order to get this to work with the version of tiles that we had versus what OpenSeaDragon would \"accept\".  We basically decided to just settle on this nasty hack as this was needed for some digital classes ASAP and computing new tiles would be A) expensive and B) take too much time.  When perfect isn't available, good enough will suffice!"
+                "p": "The site is a static build deployed to S3 and edge-cached on a Cloudfront CDN. ☁️  This is currently still a WIP as I'm looking to set up WP GraphQL for easier content management."
             }
         ]
     },
@@ -87,14 +56,48 @@
         "href": "twitch",
         "src": "./assets/twitch.jpg",
         "text": "HTML mock-up for Barnes twitch polling dialog.",
-        "isTall": true,
         "links": [],
         "description": [
             {
-                "p": "SCSS of Barnes styling for our Twitch service.  This stylesheet was drawn up for classes that the Barnes were giving for pre-K kids during the beginning of quarantine."
+                "p": "SCSS of Barnes styling for our Twitch service.  This stylesheet was drawn up for classes 🎓 that the Barnes were giving for pre-K kids during the beginning of quarantine."
             },
             {
                 "p": "It's really wild to work at a place for long enough that you begin to understand company style in an intuitive way.  I felt the need to include this just as it was maybe the first thing I wrote blind that really had a true LAF of the Barnes' digital experience."
+            }
+        ]
+    },
+    {
+        "title": "Barnes Contactless Ticketing for Temi",
+        "technologies": "Figma, Kotlin",
+        "href": "contactless-ticketing",
+        "src": "./assets/contactlessTicketing.jpg",
+        "text": "Figma sketch of Contactless Ticketing prototype for Temi robot.",
+        "links": [
+            {
+                "title": "NBC Philly — Press",
+                "href": "https://www.nbcphiladelphia.com/entertainment/philly-live/barnes-foundation-welcomes-back-visitors-with-safety-measures-in-place/2485508/"
+            }
+        ],
+        "description": [
+            {
+                "p": "The Barnes closed to the public 🚫 in late March of 2020 due to COVID-19.  As part of the reopening plan in late July, we developed an automated capacity management system 🦾 to make sure that we were compliant with <a href=\"https://www.barnesfoundation.org/covid-19\" target=\"_blank\" rel=\"noopener noreferrer\">Philadelphia's venue guidelines</a>. 👨‍⚕️"
+            },
+            {
+                "p": "As part of this initiative, I developed the visitor-facing Android 🤖 application that scans barcodes and ushers users into the Barnes.  Designs were outlined in Figma and written up in Kotlin over the course of 3 weeks while the node.js server was built concurrently by our lead, Chris."
+            },
+            {
+                "img": {
+                    "src": "./assets/contactlessTicketing__josh.jpg",
+                    "alt": "Josh scans in a ticket.",
+                    "quote": "Josh, the head of Visitor Services at the Barnes, scans in the inaugural ticket in late July. 🎟"
+                }
+            },
+            {
+                "img": {
+                    "src": "./assets/contactlessTicketing__me.jpg",
+                    "alt": "Testing out the Temi under poor network conditions. 🐢",
+                    "quote": "Testing out the Temi under poor network conditions (on vacation at the Jersey shore)."
+                }
             }
         ]
     },
@@ -113,10 +116,70 @@
         ],
         "description": [
             {
-                "p": "Drew up the search results page to match the designs of <a href=\"https://area17.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Area17</a>, including a fancy dropdown and using placeholders for the Barnes' Craft CMS site."
+                "p": "Drew up the search results page to match the designs of <a href=\"https://area17.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Area17</a>, including a fancy 💅 dropdown and using placeholders for the Barnes' Craft CMS site."
             },
             {
-                "p": "The placeholder style here was heavily influenced by <a href=\"https://semantic-ui.com/elements/placeholder.html\" target=\"_blank\" rel=\"noopener noreferrer\">Semantic UI's placeholder</a> — wish we had that shiny animation though!"
+                "p": "The placeholder style here was heavily influenced by <a href=\"https://semantic-ui.com/elements/placeholder.html\" target=\"_blank\" rel=\"noopener noreferrer\">Semantic UI's placeholder</a> — wish we had that shiny ✨ animation though!"
+            }
+        ]
+    },
+    {
+        "title": "Barnes IIIF Deep Viewer",
+        "technologies": "React, TypeScript",
+        "href": "deep-viewer",
+        "srcName": "deepViewer",
+        "text": "Examining a detail of “Unknown Artist, Hieronymus Bosch — Christ Mocked” with the Barnes IIIF Deep Viewer.",
+        "isVideo": true,
+        "links": [],
+        "description": [
+            {
+                "p": "Written largely around the <a href=\"https://github.com/openseadragon/openseadragon\" target=\"_blank\" rel=\"noopener noreferrer\">OpenSeaDragon library</a> 🔎 which manages images tiled in a specific directory structure."
+            },
+            {
+                "p": "This project was eventually included in our collection site, although a bit of guerilla patching 🦍 was needed here — <a href=\"https://github.com/BarnesFoundation/Barnes-Online-Collection/blob/development_redesign_frontend/src/components/Zoom/Zoom.jsx#L11-L15\" target=\"_blank\" rel=\"noopener noreferrer\">actual modifying library prototypes</a>. This was necessary in order to get this to work with the version of tiles that we had versus what OpenSeaDragon would \"accept\".  We basically decided to just settle on this nasty hack as this was needed for some digital classes ASAP and computing new tiles would be A) expensive 💰 and B) take too much time. ⏰  When perfect isn't available, good enough will suffice!"
+            }
+        ]
+    },
+    {
+        "title": "Barnes Live",
+        "technologies": "React, AWS, Serverless",
+        "href": "live",
+        "src": "./assets/live.jpg",
+        "text": "Broadcasting an episode of Barnes Art Adventures.",
+        "description": [
+            {
+                "p": "We bolted together AWS Interactive Video Service for the low latency live video feed and <a href=\"https://getstream.io\" target=\"_blank\" rel=\"noopener noreferrer\">Stream</a> for our chat. Everything here was locked into place using — you guessed it — React ⚛ and node.js ⬡, deployed via Serverless 🚫 to AWS Lambda. λ"
+            }
+        ]
+    },
+    {
+        "title": "Barnes Membership Experience",
+        "technologies": "React, TypeScript",
+        "href": "membership",
+        "isVideo": true,
+        "srcName": "membership",
+        "text": "",
+        "description": [
+            {
+                "p": "After reopening after quarantine, 😷 we wanted to make a membership portal at the Barnes for a more contactless 🙌 experience for our guests.  This application offers convenient methods for a member to purchase tickets, display their membership card, and see updates from the Barnes via Firebase 🔥 notifications. "
+            },
+            {
+                "p": "This application was spun up in TypeScript on the client and server, and basically all data inside the application is from our third party ticketing vendor, which we built upon as our source of truth. Login was done via SMS authentication with AWS Pinpoint."
+            }
+        ]
+    },
+    {
+        "title": "Barnes SMS Ticketing",
+        "technologies": "React, TypeScript, Serverless",
+        "href": "sms-ticketing",
+        "src": "./assets/sms.jpg",
+        "text": "Ticket order from sms.barnesfoundation.org, employing some closure within the UI to represent a continuous set.",
+        "description": [
+            {
+                "p": "Ripped out the UI from our membership site and borrowed the SMS mechanism to create our SMS ticketing website, which is sent to a guest before their scheduled arrival time. ⏰"
+            },
+            {
+                "p": "While our lead handled writing the logic for sending SMS links via AWS Pinpoint, I managed to spin up a solid UI and manage the serverless deploy over a two-day period."
             }
         ]
     }

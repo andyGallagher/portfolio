@@ -20,6 +20,7 @@ export const fontSize = {
 ////////////
 // COLORS //
 ////////////
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 /**
  * Convert hex value to RGB.
@@ -34,7 +35,13 @@ const hexToRgb = (hex) => {
 // Hex color values object.
 const colors = {
     primary: "#8ede54",
-    secondary: "#00f",
+    secondary: "#0000ff",
+
+    link: !isDarkMode ? "#00f" : "#8ede54",
+    hilight: !isDarkMode ? "#8ede54" : "#42f554",
+
+    copy: !isDarkMode ? "#000" : "#fff",
+    background: !isDarkMode ? "#fff" : "#242424",
 };
 
 // Take all keys and keep hex, appending rgb values.

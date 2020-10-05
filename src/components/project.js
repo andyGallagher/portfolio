@@ -1,4 +1,5 @@
 /** @jsx jsx */
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from "react";
 import { jsx, css } from "@emotion/core";
 import styled from "@emotion/styled";
@@ -8,26 +9,30 @@ import { Quote } from "../styles/components/quote";
 import { Mission } from "../styles/components/mission";
 import { Interrupt } from "../styles/components/interrupt";
 import { NoOrphan } from "../styles/components/noOrphan";
-import { fontSize } from "../styles/variables";
+import { fontSize, color } from "../styles/variables";
 import { linkStyle } from "../styles/mixins";
+import { breakpoints } from "../styles/breakpoints";
 import * as videos from "../assets/images/projects/video";
 
-const projectStyle = css({
-    fontSize: fontSize.copy,
-    lineHeight: 1.25,
-    fontWeight: 100,
-    fontStretch: "expanded",
-    width: "80%",
+const projectStyle = css(
+    breakpoints({
+        fontSize: fontSize.copy,
+        lineHeight: 1.25,
+        fontWeight: 100,
+        fontStretch: "expanded",
+        width: ["100%", "80%"],
 
-    "& a": {
-        ...linkStyle,
-    },
-});
+        "& a": {
+            ...linkStyle,
+        },
+    })
+);
 
-const workImageCss = css({
-    maxWidth: 400,
-    margin: "15px 0 0",
-});
+const workImageCss = css(
+    breakpoints({
+        maxWidth: ["100%", 400],
+    })
+);
 
 const marginTop = css({
     marginTop: 15,
@@ -39,6 +44,35 @@ const ProjectSection = styled.div({
 
 const ProjectCopy = styled.p({
     ...projectStyle,
+});
+
+const ProjectFrame = styled.div({
+    display: "inline-block",
+
+    WebkitBoxShadow: `8px 8px 0 0 rgba(${color.primary.rgb}, 0.1)`,
+    MozBoxShadow: `8px 8px 0 0 rgba(${color.primary.rgb}, 0.1)`,
+    boxShadow: `8px 8px 0 0 rgba(${color.primary.rgb}, 0.1)`,
+
+    border: `4px double rgba(${color.primary.rgb}, 0.4)`,
+
+    "& > span": {
+        maxWidth: 400,
+        borderTop: `2px dotted rgba(${color.primary.rgb}, 0.4)`,
+        padding: 20,
+    },
+});
+
+const ProjectLinks = styled.ul({
+    listStyle: "none",
+    padding: 0,
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    margin: 0,
+
+    "& > li": {
+        marginRight: 10,
+    },
 });
 
 export const Project = ({
@@ -80,8 +114,9 @@ export const Project = ({
         return <React.Fragment></React.Fragment>;
     });
 
+    const hasLinks = Boolean(links && links.length);
     const linkSection =
-        Boolean(links && links.length) &&
+        hasLinks &&
         links.map(({ title, href }, i) => (
             <li key={i}>
                 <a
@@ -98,7 +133,7 @@ export const Project = ({
     return (
         <React.Fragment>
             <header>
-                <Mission narrow>
+                <Mission narrow isProject>
                     {title}{" "}
                     <NoOrphan>
                         (<Interrupt>{technologies}</Interrupt>)
@@ -106,31 +141,38 @@ export const Project = ({
                 </Mission>
             </header>
             <main>
-                {isVideo ? (
-                    <video
-                        css={workImageCss}
-                        src={videos[srcName]}
-                        muted={true}
-                        loop={true}
-                        autoPlay={true}
-                    />
-                ) : (
-                    <Img css={workImageCss} fluid={src.childImageSharp.fluid} />
-                )}
-                <Quote notCentered>{text}</Quote>
+                <ProjectFrame>
+                    {isVideo ? (
+                        <video
+                            css={workImageCss}
+                            src={videos[srcName]}
+                            muted={true}
+                            loop={true}
+                            autoPlay={true}
+                        />
+                    ) : (
+                        <Img
+                            css={workImageCss}
+                            fluid={src.childImageSharp.fluid}
+                        />
+                    )}
+                    <Quote notCentered>{text}</Quote>
+                </ProjectFrame>
 
                 {/** Links */}
                 <ProjectSection css={marginTop}>
                     <Link to="/">Back to home 🏠</Link>
-                    <span
-                        css={{
-                            display: "block",
-                            margin: "30px 0 10px",
-                        }}
-                    >
-                        External links and press:{" "}
-                    </span>
-                    {linkSection}
+                    {hasLinks && (
+                        <span
+                            css={{
+                                display: "block",
+                                margin: "30px 0 0",
+                            }}
+                        >
+                            External links and press:{" "}
+                        </span>
+                    )}
+                    <ProjectLinks>{linkSection}</ProjectLinks>
                 </ProjectSection>
 
                 {/** Description/Content */}

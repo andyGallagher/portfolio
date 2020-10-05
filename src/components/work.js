@@ -4,10 +4,15 @@ import { useStaticQuery, graphql } from "gatsby";
 import styled from "@emotion/styled";
 import { Link } from "@reach/router";
 import Img from "gatsby-image";
-import * as videos from "../assets/images/projects/video";
+import { Mission } from "../styles/components/mission";
+import { Interrupt } from "../styles/components/interrupt";
 import { FlexContainer } from "../styles/components/flexContainer";
+import * as videos from "../assets/images/projects/video";
 import { color } from "../styles/variables";
 import { linkStyle } from "../styles/mixins";
+import { breakpoints } from "../styles/breakpoints";
+
+const width = ["100%", 350];
 
 // Fetch all projects
 const query = graphql`
@@ -18,7 +23,6 @@ const query = graphql`
                     title
                     text
                     isVideo
-                    isTall
                     srcName
                     href
                     srcName
@@ -47,29 +51,39 @@ const WorkList = styled.ul({
     margin: "0 0 45px",
 });
 
-const WorkListItem = styled.li({
-    width: 300,
-    margin: "30px 30px 0 0",
+const WorkWrapper = styled.div(
+    breakpoints({
+        paddingTop: [30, 0],
+        borderTop: [`1px dashed rgba(${color.primary.rgb}, 0.4)`, "none"],
+        marginBottom: [45, 0],
+    })
+);
 
-    WebkitBoxShadow: `10px 10px 0 0 rgba(${color.primary.rgb}, 0.15)`,
-    MozBoxShadow: `10px 10px 0 0 rgba(${color.primary.rgb}, 0.15)`,
-    boxShadow: `10px 10px 0 0 rgba(${color.primary.rgb}, 0.15)`,
-    transition: "box-shadow 0.4s, transform 0.4s",
+const WorkListItem = styled.li(
+    breakpoints({
+        width: [undefined, width],
+        margin: ["15px 20px 0 0", "30px 30px 0 0"],
 
-    border: `1px solid rgba(${color.primary.rgb}, 0.4)`,
+        WebkitBoxShadow: `10px 10px 0 0 rgba(${color.primary.rgb}, 0.15)`,
+        MozBoxShadow: `10px 10px 0 0 rgba(${color.primary.rgb}, 0.15)`,
+        boxShadow: `10px 10px 0 0 rgba(${color.primary.rgb}, 0.15)`,
+        transition: "box-shadow 0.4s, transform 0.4s",
 
-    "&:first-of-type": {
-        marginTop: 0,
-    },
+        border: `1px solid rgba(${color.primary.rgb}, 0.4)`,
 
-    "&:hover": {
-        WebkitBoxShadow: `12px 12px 0 0 rgba(${color.primary.rgb}, 0.15)`,
-        MozBoxShadow: `12px 12px 0 0 rgba(${color.primary.rgb}, 0.15)`,
-        boxShadow: `12px 12px 0 0 rgba(${color.primary.rgb}, 0.15)`,
+        "&:first-of-type": {
+            marginTop: 0,
+        },
 
-        transform: "scale(1.01)",
-    },
-});
+        "&:hover": {
+            WebkitBoxShadow: `12px 12px 0 0 rgba(${color.primary.rgb}, 0.15)`,
+            MozBoxShadow: `12px 12px 0 0 rgba(${color.primary.rgb}, 0.15)`,
+            boxShadow: `12px 12px 0 0 rgba(${color.primary.rgb}, 0.15)`,
+
+            transform: "scale(1.01)",
+        },
+    })
+);
 
 const WorkListCaption = styled.span({
     padding: "20px 15px",
@@ -82,9 +96,11 @@ const workItemCss = css({
     ...linkStyle,
 });
 
-const workImageCss = css({
-    width: 300,
-});
+const workImageCss = css(
+    breakpoints({
+        width,
+    })
+);
 
 const splitList = (arr) => {
     const arrDiv = Math.ceil(arr.length / 2);
@@ -99,12 +115,15 @@ export const Work = () => {
     const workLists = splitList(edges);
 
     return (
-        <FlexContainer flexDirection="row">
-            {workLists.map((workList) => (
-                <WorkList>
-                    {workList.map(
-                        (
-                            {
+        <WorkWrapper>
+            <Mission>
+                <Interrupt>Work</Interrupt>
+            </Mission>
+            <FlexContainer flexDirection={["row", "row"]}>
+                {workLists.map((workList, i) => (
+                    <WorkList key={i}>
+                        {workList.map(
+                            ({
                                 node: {
                                     title,
                                     technologies,
@@ -113,35 +132,36 @@ export const Work = () => {
                                     srcName,
                                     isVideo,
                                 },
-                            },
-                            i
-                        ) => (
-                            <WorkListItem key={title}>
-                                <Link css={workItemCss} to={`/${href}`}>
-                                    {isVideo ? (
-                                        <video
-                                            css={workImageCss}
-                                            src={videos[srcName]}
-                                            muted={true}
-                                            loop={true}
-                                            autoPlay={true}
-                                        />
-                                    ) : (
-                                        <Img
-                                            css={workImageCss}
-                                            fluid={src.childImageSharp.fluid}
-                                        />
-                                    )}
+                            }) => (
+                                <WorkListItem key={title}>
+                                    <Link css={workItemCss} to={`/${href}`}>
+                                        {isVideo ? (
+                                            <video
+                                                css={workImageCss}
+                                                src={videos[srcName]}
+                                                muted={true}
+                                                loop={true}
+                                                autoPlay={true}
+                                            />
+                                        ) : (
+                                            <Img
+                                                css={workImageCss}
+                                                fluid={
+                                                    src.childImageSharp.fluid
+                                                }
+                                            />
+                                        )}
 
-                                    <WorkListCaption>
-                                        {title} ({technologies})
-                                    </WorkListCaption>
-                                </Link>
-                            </WorkListItem>
-                        )
-                    )}
-                </WorkList>
-            ))}
-        </FlexContainer>
+                                        <WorkListCaption>
+                                            {title} ({technologies})
+                                        </WorkListCaption>
+                                    </Link>
+                                </WorkListItem>
+                            )
+                        )}
+                    </WorkList>
+                ))}
+            </FlexContainer>
+        </WorkWrapper>
     );
 };

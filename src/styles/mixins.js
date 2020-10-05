@@ -2,9 +2,9 @@ import { color } from "./variables";
 
 export const linkStyle = {
     fontStretch: "expanded",
-    color: color.secondary.hex,
+    color: color.link.hex,
 
     "&:active, &:visited": {
-        color: color.secondary.hex,
+        color: color.link.hex,
     },
 };

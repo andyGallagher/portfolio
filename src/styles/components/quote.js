@@ -11,13 +11,12 @@ const QuoteSpan = styled.span(({ isPadded, extraSpacing, notCentered }) =>
         fontWeight: 100,
         fontFamily: fontFamily.primary,
         fontSize: fontSize.zeta,
-        fontStretch: "condensed",
-        fontStyle: "italic",
 
         padding: isPadded ? "15px 20px 0" : "15px 0",
         boxSizing: "border-box",
 
         letterSpacing: extraSpacing ? 2.8 : 1.1,
+        lineHeight: 1.1,
 
         textAlign: !notCentered && "center",
         width: [undefined, notCentered ? 300 : 250],

@@ -6,14 +6,12 @@ import { Work } from "../components/work";
 import { Profile } from "../components/profile";
 import { FlexContainer } from "../styles/components/flexContainer";
 
-export default () => {
-    return (
-        <SiteWrapper>
-            <FlexContainer>
-                <Header />
-                <Work />
-                <Profile />
-            </FlexContainer>
-        </SiteWrapper>
-    );
-};
+export default () => (
+    <SiteWrapper>
+        <FlexContainer>
+            <Header />
+            <Work />
+            <Profile />
+        </FlexContainer>
+    </SiteWrapper>
+);

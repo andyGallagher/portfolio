@@ -1,12 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
+import { Hilight } from "../styles/components/hilight";
 import { breakpoints } from "../styles/breakpoints";
-import { fontFamily, color, zIndex } from "../styles/variables";
-
-const Hilight = styled.span({
-    color: color.primary.hex,
-});
+import { fontFamily, zIndex } from "../styles/variables";
 
 const SideBarColumn = styled.aside(
     breakpoints({

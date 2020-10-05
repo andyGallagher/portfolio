@@ -1,10 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import styled from "@emotion/styled";
 import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
-import { Quote } from "../styles/components/quote";
-import { breakpoints } from "../styles/breakpoints";
 import { Social } from "./social";
+import { Mission } from "../styles/components/mission";
+import { Interrupt } from "../styles/components/interrupt";
+import { color } from "../styles/variables";
+import { breakpoints } from "../styles/breakpoints";
 
 const query = graphql`
     query ProfilePictureQuery {
@@ -22,27 +25,30 @@ const query = graphql`
     }
 `;
 
+const ProfileFrame = styled.section(
+    breakpoints({
+        display: [undefined, "flex"],
+        flexDirection: [undefined, "column"],
+        borderTop: [`1px dashed rgba(${color.primary.rgb}, 0.4)`, "none"],
+        paddingTop: ["30px", 0],
+    })
+);
+
 export const Profile = () => {
     const data = useStaticQuery(query);
 
     return (
-        <section
-            css={breakpoints({
-                display: [undefined, "flex"],
-                flexDirection: [undefined, "column"],
-            })}
-        >
+        <ProfileFrame>
+            <Mission>
+                <Interrupt>About</Interrupt>
+            </Mission>
             <Img
                 fluid={data.file.childImageSharp.fluid}
                 css={breakpoints({
-                    width: [undefined, "300px"],
+                    width: ["80%", "300px"],
                 })}
             />
-            <Quote extraSpacing notCentered>
-                “Water deeply, infrequently.” — Ancient Gardening Proverb
-            </Quote>
-
             <Social />
-        </section>
+        </ProfileFrame>
     );
 };

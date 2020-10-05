@@ -3,16 +3,17 @@
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { breakpoints } from "../styles/breakpoints";
-import { fontSize, color } from "../styles/variables";
+import { fontSize } from "../styles/variables";
+import { linkStyle } from "../styles/mixins";
 
 const SocialWrapper = styled.section(
     breakpoints({
         width: "100%",
         display: "flex",
         flexDirection: "column",
-        alignItems: ["center", "flex-start"],
-        marginTop: ["50px", "20px"],
-        fontSize: "1rem",
+        alignItems: "flex-start",
+        marginTop: ["30px", "20px"],
+        marginBottom: ["20px", 0],
     })
 );
 
@@ -25,11 +26,7 @@ const SocialLinkWrapper = styled.div({
 });
 const SocialLink = styled.a({
     fontWeight: 400,
-    color: color.secondary.hex,
-
-    "&:active, &:visited": {
-        color: color.secondary.hex,
-    },
+    ...linkStyle,
 });
 
 export const Social = () => {

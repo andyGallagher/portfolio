@@ -15,7 +15,7 @@ const Subheader = styled.h2(
         letterSpacing: 1.1,
         fontWeight: 400,
 
-        margin: "0 0 45px",
+        margin: ["0 0 30px", "0 0 45px"],
         width: [undefined, "65%"],
     })
 );
@@ -26,7 +26,7 @@ export const Header = () => (
         <Mission>
             I'm an interdisciplinary{" "}
             <NoOrphan>
-                <Interrupt>UI/UX developer</Interrupt> 👨🏻‍💻{" "}
+                <Interrupt>UI/UX dev</Interrupt> 👨🏻‍💻{" "}
             </NoOrphan>
             and{" "}
             <NoOrphan>

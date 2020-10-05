@@ -1,8 +1,13 @@
+const config = require("./config");
+
 module.exports = {
     siteMetadata: {
         title: `Andrew Gallagher → Portfolio`,
     },
     plugins: [
+        // Site metadata
+        "gatsby-plugin-react-helmet",
+
         // SCSS
         "gatsby-plugin-sass",
 
@@ -26,9 +31,9 @@ module.exports = {
         {
             resolve: "gatsby-plugin-s3",
             options: {
-                bucketName: "portfolio-3192e980-ba76-11ea-b3de-0242ac130004",
+                bucketName: config.aws.s3BucketName,
                 protocol: "https",
-                hostname: "www.andrewgallagher-portfolio.com/",
+                hostname: config.aws.url,
             },
         },
     ],
