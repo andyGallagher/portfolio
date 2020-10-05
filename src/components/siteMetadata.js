@@ -3,8 +3,6 @@ import { jsx } from "@emotion/core";
 import { Helmet } from "react-helmet";
 import config from "../config";
 
-console.log(config);
-
 export const SiteMetaData = () => (
     <Helmet title={config.meta.title}>
         {/* Title */}

@@ -49,13 +49,13 @@ const WorkList = styled.ul({
     listStyle: "none",
     padding: 0,
     margin: "0 0 45px",
+    flex: "0 0 50%",
 });
 
 const WorkWrapper = styled.div(
     breakpoints({
         paddingTop: [30, 0],
         borderTop: [`1px dashed rgba(${color.primary.rgb}, 0.4)`, "none"],
-        marginBottom: [45, 0],
     })
 );
 

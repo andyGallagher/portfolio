@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Hilight } from "../styles/components/hilight";
 import { breakpoints } from "../styles/breakpoints";
-import { fontFamily, color, zIndex } from "../styles/variables";
+import { fontFamily } from "../styles/variables";
 import { Link } from "gatsby";
 
 const NavBar = styled.nav(

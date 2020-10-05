@@ -9,8 +9,6 @@ import { fontFamily, zIndex, color } from "../styles/variables";
 import { breakpoints } from "../styles/breakpoints";
 import "../assets/scss/styles.scss";
 
-console.log(color);
-
 const GlobalStyles = styled.div(
     breakpoints({
         fontFamily: fontFamily.primary,

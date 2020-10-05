@@ -21,7 +21,8 @@ export const fontSize = {
 ////////////
 // COLORS //
 ////////////
-const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+// # TODO => FIX THIS.
+const isDarkMode = true; // window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 /**
  * Convert hex value to RGB.
