@@ -39,8 +39,8 @@ export const Profile = () => {
 
     return (
         <ProfileFrame>
-            <Mission>
-                <Interrupt>About</Interrupt>
+            <Mission isTitle>
+                <Interrupt>Contact</Interrupt>
             </Mission>
             <Img
                 fluid={data.file.childImageSharp.fluid}

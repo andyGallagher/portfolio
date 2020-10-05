@@ -11,6 +11,7 @@ export const fontFamily = {
 ////////////////
 export const fontSize = {
     massive: 180,
+    title: 48,
     header: 36,
     subheader: 24,
     copy: 18,

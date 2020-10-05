@@ -50,10 +50,12 @@ export const Header = () => (
             for <NoOrphan>Android 🤖,</NoOrphan> or{" "}
             <Interrupt small>React Native</Interrupt> for{" "}
             <NoOrphan>iOS. 🍏</NoOrphan> That said, my{" "}
-            <NoOrphan>portfolio 🗂</NoOrphan> is largely what I{" "}
-            <NoOrphan>love 💕</NoOrphan> to do most: creating maintainable,
+            <NoOrphan>portfolio 💼</NoOrphan> is largely dedicated to what I{" "}
+            <NoOrphan>love 💕</NoOrphan> to create most: maintainable,
             extensible React web applications written in{" "}
-            <Interrupt small>TypeScript</Interrupt>.
+            <NoOrphan>
+                <Interrupt small>TypeScript</Interrupt>.
+            </NoOrphan>
         </Subheader>
     </header>
 );

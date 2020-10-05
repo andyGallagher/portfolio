@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import { breakpoints } from "../breakpoints";
 import { fontSize } from "../variables";
 
-export const Mission = styled.h1(({ narrow, isProject }) =>
+export const Mission = styled.h1(({ narrow, isProject, isTitle }) =>
     breakpoints({
-        fontSize: fontSize.header,
+        fontSize: isTitle ? fontSize.title : fontSize.header,
         lineHeight: 1.3,
         letterSpacing: 1.2,
         fontWeight: [700, isProject ? 700 : 400],

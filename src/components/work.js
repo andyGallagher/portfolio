@@ -116,7 +116,7 @@ export const Work = () => {
 
     return (
         <WorkWrapper>
-            <Mission>
+            <Mission isTitle>
                 <Interrupt>Work</Interrupt>
             </Mission>
             <FlexContainer flexDirection={["row", "row"]}>
