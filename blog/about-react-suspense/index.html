@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link rel="stylesheet" href="../../index.css" />
+        <title>About React Suspense &mdash; Andy Gallagher</title>
+    </head>
+    <body>
+        <main>
+            <strong class="home"
+                ><header><a href="/">Home</a></header></strong
+            >
+            <h2 style="margin-bottom: 0.5rem">About React Suspense</h2>
+
+            <p style="margin: 0">
+                <i>Author:</i>
+                Andrew Gallagher
+            </p>
+            <p style="margin-top: 0">
+                <i>Published at:</i>
+                Sun Feb 19 2023
+            </p>
+
+            <hr />
+            <p>
+                Let's go back in time &mdash; it's late in 2018 and I am
+                breathlessly watching our sweet boy Danny Abramov
+                <a href="https://www.youtube.com/watch?v=nLF0n9SACd4"
+                    >outline React's new <em>Suspense</em> component</a
+                >.&nbsp; There's a lot of shit as an application developer I
+                just don't really understand; talk about time slicing, CPUs,
+                whatever.&nbsp; But mixed in to the talk there is a promise that
+                resonates with me: with a new thing called <em>Suspense</em> you
+                can control the loading state of a component from within that
+                component itself.&nbsp; A young Andy Gallagher is blown away by
+                this.&nbsp; Maybe this would open up a new way for me to
+                organise a React architecture? Maybe no more need to drill
+                loading states into a component from a parent via props and
+                instead localize behavior within the component itself?
+            </p>
+            <p>
+                Fast forward a bit, say, a half of a decade to present
+                day.&nbsp; <em>Suspense</em> is still
+                <a
+                    href="https://codesandbox.io/p/sandbox/restless-waterfall-7hzg5z?file=%2Fsrc%2FAlbums.js%3A22%2C35-22%2C58"
+                    >a TODO wrapped around an experimental hook</a
+                >
+                in the example provided by the React docs.&nbsp; There's a bit
+                of discussion about
+                <em>Suspense</em> every
+                <a
+                    href="https://github.com/reactjs/rfcs/blob/main/text/0213-suspense-in-react-18.md"
+                    >now</a
+                >
+                and
+                <a href="https://www.youtube.com/watch?v=FZ0cG47msEk&amp;t=409s"
+                    >then</a
+                >.&nbsp; Outside of opinionated frameworks (e.g. Next.js), in
+                2024 there's still just one thing that <em>Suspense</em> is used
+                for: code-splitting.&nbsp; In an average application, this is
+                (maybe) done once at the router level.
+            </p>
+            <p>
+                It's a bit of a mess!&nbsp; So it makes a some sense that
+                opinionated frameworks want to take
+                <em>Suspense</em>, make it theirs, and lock in some users.&nbsp;
+                I can't necessarily blame them?&nbsp; If you're trying to get
+                some buy-in for your framework, solving a difficult problem that
+                even the React team can't figure out is probably a good look for
+                you.&nbsp; The industry seems hellbent on this feature making it
+                to market for reasons so might as well capitalize on it?
+            </p>
+            <p>
+                Either way, within these frameworks we have
+                <em>Suspense</em> now, and this incarnation of
+                <em>Suspense</em> is generally used to enable SSR with
+                streaming.&nbsp; This specific understanding of
+                <em>Suspense</em> is now ubiquitous enough that the feature is
+                synonymous with SSR with streaming.&nbsp; I'm actually somewhat
+                OK with this outcome &mdash; like I guess it is better than
+                nothing? But it appears that we have bought into a future where
+                React features are tightly coupled to the implementations of a
+                few specific frameworks.&nbsp; Accordingly, many developers'
+                mental models of React will become increasingly specific to a
+                specific implementation of React.
+            </p>
+            <p>
+                So I wonder: is the juice worth the squeeze?&nbsp; It feels like
+                <em>Suspense</em> is something that some of us wanted (or
+                rather, had hyped to us) for long enough that we were willing to
+                deal with years of a half baked implementation.&nbsp; I've tried
+                it out, have read the docs, and
+                <a
+                    href="https://andy-gallagher.com/blog/my-experience-using-hydrogen/"
+                    >deployed projects that used Suspense</a
+                >.&nbsp; I know that the TTFB and TTI is for sure lower, but I
+                don't feel that this massive increase in both complexity and
+                vendor lock-in is worth it for a lot of projects.&nbsp;
+                Seriously!&nbsp; There's a lot of discussion in the front end
+                space about speeding things up, making UX better,
+                whatever.&nbsp; But let's give a little&nbsp; acknowledgement to
+                the fact that when things become more complicated, they are more
+                prone to being fucked up.
+            </p>
+            <p>
+                Ultimately, I wonder about a lost future where instead of all
+                this energy being put towards
+                <em>Suspense</em>, just a fraction of the time was spent on a
+                library that could just create an initial UI shell, stream the
+                rest of your React bundle, and then hydrate that initial
+                shell.&nbsp; Obviously this is not very robust, but it's weird
+                that I feel like something small like this would both lower the
+                complexity ceiling and solve pretty much everything I would ever
+                really try to do with <em>Suspense</em>.&nbsp; Seriously!&nbsp;
+                I'm honestly just not going to need multiple layers of Suspense,
+                nor would I trade off codebase legibility for small performance
+                gains.
+            </p>
+        </main>
+    </body>
+</html>

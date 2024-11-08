@@ -1,0 +1,235 @@
+<html>
+    <head>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link rel="stylesheet" href="../../index.css" />
+        <title>
+            My Experience Using Shopify's Hydrogen &mdash; Andy Gallagher
+        </title>
+    </head>
+    <body>
+        <main>
+            <strong class="home"
+                ><header><a href="/">Home</a></header></strong
+            >
+
+            <h2 style="margin-bottom: 0.5rem">
+                My Experience Using Shopify's Hydrogen
+            </h2>
+
+            <p style="margin: 0">
+                <i>Author:</i>
+                Andrew Gallagher
+            </p>
+            <p style="margin-top: 0">
+                <i>Published at:</i>
+                Sun Feb 19 2023
+            </p>
+
+            <hr />
+            <p>
+                I wanted to make my fashion designer girlfriend a great web
+                experience
+                <a href="http://rileyhighshop.com/">for her personal brand</a>.
+                She's a non-technical but hands-on person, so I wanted to make
+                something that was familiar for her to interface with and
+                automated a lot of the cross-posting that's required when
+                running an e-commerce business.
+            </p>
+            <p>
+                Using a CMS as a headless platform opened up the possibility of
+                doing things like crossposting products to Etsy, automating
+                Instagram posts, and managing inventory from a single data
+                source. This would let my girlfriend spend more time sewing and
+                less time crafting posts. I knew that selling pieces online was
+                also a goal for her, so a bespoke solution or something like
+                Shopify/Big Cartel would eventually be part of the picture.
+            </p>
+            <p>
+                Naturally, this led me to
+                <a href="https://hydrogen.shopify.dev/">Hydrogen</a>, a
+                framework for developing Shopify sites, which I ultimately
+                selected for the following reasons:
+            </p>
+            <ul>
+                <li>It looked cool</li>
+                <li>
+                    I'm a React developer, so I liked the idea of being able to
+                    work with Shopify like any other React project. I wouldn't
+                    have to fuss around with Liquid or be constrained to an
+                    existing Shopify template. Note that I have previously
+                    chosen to do things like work with React Native before so I
+                    am aware that I have terminal React-brain.
+                </li>
+                <li>
+                    Managing this project (ie: sales, communications, analytics,
+                    whatever) would eventually be handed off to my non-technical
+                    girlfriend, so going fully bespoke for a shopping platform
+                    was out of the question.
+                </li>
+                <li>
+                    I wanted to keep the development feedback loop both simple
+                    and tight by leveraging Shopify's existing CI.
+                </li>
+                <li>
+                    The project does not seem tremendously popular, despite
+                    appearing to be well-funded and well-marketed &mdash;
+                    there's probably like 20-25 hacker news posts about this
+                    whole thing over it's two-year lifespan... I was feeling
+                    curious to find out for myself.
+                </li>
+            </ul>
+            <p>
+                I walked into the project with close to zero experience with
+                Shopify/Liquid, Hydrogen, or Remix. I chose only default
+                configuration options: JavaScript for language, Remix for
+                framework, and
+                <a
+                    href="https://shopify.dev/docs/custom-storefronts/hydrogen/project-structure#oxygen-hosting"
+                    >Oxygen</a
+                >
+                for runtime. Given that this was a side project for me, I was
+                comfortable with the inevitable fuck-ups and running behind
+                schedule that come with working within new frameworks.
+            </p>
+            <p></p>
+            <p>
+                With that said, let's explore if Hydrogen lives up to the
+                <a
+                    href="https://shopify.engineering/high-performance-hydrogen-powered-storefronts"
+                    >initial promises of the platform back in 2021</a
+                >:
+            </p>
+            <blockquote>
+                1. fast user experience: fast loading and responsive<br />2.
+                best-in-class merchant capabilities: personalized, contextual,
+                and dynamic commerce<br />3. great developer experience: easy,
+                maintainable, and fun.
+            </blockquote>
+            <p></p>
+            <h3>Things that were good:</h3>
+            <p><strong>It's Shopify</strong></p>
+            <p>
+                Much like no CTO is fired for choosing SAP, my girlfriend
+                probably won't be pissed in at me in a year or two for choosing
+                a mature, stable e-commerce platform. There's also the bonus of
+                the large community that does weird and interesting things with
+                Shopify's API, so I was never alone in the deep end with any
+                particular bug.
+            </p>
+            <p><strong>Built in CI/CD</strong></p>
+            <p>
+                Honestly
+                <a
+                    href="https://shopify.dev/docs/custom-storefronts/hydrogen/project-structure#oxygen-github-action"
+                    >this shit rocks</a
+                >. For a small project, pushing to <em>main</em> and seeing the
+                site live in ~60 seconds is very, very nice. You're probably
+                reading this and thinking about saying, "well Andy, what about
+                having test and staging environments" and this is where I would
+                cut you off &mdash; I do not care. This is a small, weekend
+                project! I managed zero infrastructure and this freed up a huge
+                amount of time for me.
+            </p>
+            <p><strong>The docs</strong></p>
+            <p>
+                The docs on Hydrogen &mdash; and docs for Shopify in general
+                &mdash; are really robust, and the basic walkthrough on Hydrogen
+                was enough for me to get 95% of a basic e-commerce site up.
+            </p>
+            <h4></h4>
+            <h3>Things that were not good:</h3>
+            <p><strong>Remix</strong></p>
+            <p>
+                The reason Remix was chosen as the de-facto framework for
+                Hydrogen is probably a political choice. Hydrogen initially
+                started as its own React framework that eventually switched over
+                to Remix
+                <a href="https://news.ycombinator.com/item?id=33406147"
+                    >when Shopify aquihired the team there</a
+                >. There seems to be some not-invented-here syndrome going on
+                with the choice of framework as
+                <a href="https://nextjs.org/"
+                    >opposed to something more stable and popular</a
+                >, given that<a
+                    href="https://github.com/remix-run/remix/issues/2570"
+                >
+                    there are known #WONTFIX errors with hydration</a
+                >
+                when using Remix.
+            </p>
+            <p>
+                These hydration errors crop up immediately after install in a
+                fresh Hydrogen project and are somewhat severe: <em>all</em> the
+                gains of streaming SSR are invalidated for a non-trivial
+                percentage of users. Any user with a browser extension will have
+                their page rendered via CSR. As a developer, you now have a ton
+                of incidental complexity that comes with implementing streaming
+                SSR (<em>Suspense</em>, etc) and your users see none of the
+                benefits.
+            </p>
+            <p><strong>GraphQL</strong></p>
+            <p>
+                The schema for Shopify models (Products/Orders/etc) are largely
+                non-extensible &mdash; you get the fields that you get for the
+                most part &mdash; so I ended up just taking pretty much every
+                field whenever I fetched a model. There's a huge amount of
+                cognitive overhead introduced with the granular GraphQL way of
+                doing things as opposed to just pulling everything with a REST
+                call, and user's don't see a ton of benefit.
+            </p>
+            <p><strong>Shopify images are slow</strong></p>
+            <p>
+                Hydrogen has
+                <a
+                    href="https://github.com/Shopify/hydrogen/blob/main/packages/hydrogen-react/src/Image.tsx"
+                    >its own Image component</a
+                >
+                that's reminiscent of Image components in a few other
+                frameworks. It more or less handles writing srcsets,
+                accessibility, and lazy loading. This would be welcome, but
+                Shopify doesn't seem to cache images in a discernible way. I
+                consistently received multi-second "<em>Waiting for server</em>"
+                load times for images that were processed by Shopify. This is
+                really sub-par, as 99% of a fashion website is going to be
+                images, and it's crucial that an e-commerce site is as fast as
+                possible. I spent a good deal of time trying to identify and
+                then optimize this bottleneck; had I known of this performance
+                issue, I would have just processed these images myself with an
+                external service.
+            </p>
+            <p></p>
+            <h3>My takeaway:</h3>
+            <p>
+                Hydrogen is a pretty fun, lightweight framework. There's a lot
+                to love about constraining yourself to what Shopify gives you,
+                and Oxygen really rocks. If you're a capable developer and you
+                want to, like, sell a small widget, I'd (tentatively) recommend
+                using Hydrogen, so long as you're down to cut your own images.
+            </p>
+            <p>
+                That said, if I were being paid to make an e-commerce site by a
+                non-technical client, Hydrogen would not be my first choice
+                unless the client specifically requested it or unless the shop
+                was very, very small. I find dealing with the out-of-the-box
+                errors that come with Remix to be pretty unacceptable from a
+                developer perspective, and the leap of complexity between
+                templating via Liquid and writing TypeScript/GraphQL/Remix is
+                just too huge and extraneous for the average business.
+            </p>
+            <p>
+                To me, Hydrogen seems viable as a middle-of-the-road choice for
+                small projects owned by technical people. This is a very small
+                niche! A savvy technical person is generally going to want to A)
+                steer clear of the problems with Remix and just use
+                hydrogen-react via the more-featureful Next.js or B) avoid the
+                complexity of an app altogether and use an off-the-rack Liquid
+                template. There is just a really small sliver of situations
+                where a small sliver of developers would ever reach for Hydrogen
+                and would be satisfied with the results.
+            </p>
+        </main>
+    </body>
+</html>
