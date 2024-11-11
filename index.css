@@ -122,3 +122,15 @@ section {
     display: block;
     margin-bottom: 1rem;
 }
+
+.no-margin {
+    margin: 0;
+}
+
+.details {
+    margin-bottom: 1rem;
+}
+
+.no-underline {
+    text-decoration: none;
+}
