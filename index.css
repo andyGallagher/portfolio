@@ -134,3 +134,13 @@ section {
 .no-underline {
     text-decoration: none;
 }
+
+sup {
+    line-height: 0;
+
+    /* The following rules (or similar) likely come from browser 
+     * style and are not needed
+     */
+    font-size: 0.83em;
+    vertical-align: super;
+}
