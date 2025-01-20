@@ -5,7 +5,7 @@ const blogDirectory = path.join(__dirname, "blog");
 const sitemapPath = path.join(__dirname, "sitemap.xml");
 
 function buildSitemap(dir, baseUrl) {
-    let urls = [];
+    let urls = [`https://andy-gallagher.com/`];
 
     function findIndexFiles(directory) {
         const files = fs.readdirSync(directory);
