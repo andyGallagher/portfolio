@@ -1,0 +1,207 @@
+<html>
+    <head>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link rel="stylesheet" href="../../index.css" />
+        <title>
+            Ordering Chinese but this time with AI, or the Merit of Bad Ideas
+            &mdash; Andy Gallagher
+        </title>
+    </head>
+    <body>
+        <main>
+            <strong class="home"
+                ><header><a href="/">Home</a></header></strong
+            >
+            <h2>
+                Ordering Chinese but this time with AI, or the Merit of Bad
+                Ideas
+            </h2>
+
+            <p style="margin: 0">
+                <i>Author:</i>
+                Andrew Gallagher
+            </p>
+            <p style="margin-top: 0">
+                <i>Published at:</i>
+                Jan 20 2025
+            </p>
+
+            <p>
+                Back around 2012-ish, I was a member of a medium-large Facebook
+                group named simply <em>"ideas"</em>. In the group, posters wrote
+                single sentence concepts and left them for other group members
+                to consider. Ideas ranged from "a car powered by bong water and
+                positive vibes" to "two Chief Keefs". You get the picture — just
+                a bunch of guys fucking around. It was a great time.
+            </p>
+
+            <hr />
+
+            <p>
+                In software we strive for a mostly logical, causal relationship
+                between what we're developing and what we're trying to solve
+                for. What I mean is that we go out and talk to people, identify
+                some unaddressed need, figure out if the market is viable,
+                develop some kind of widget and then iterate against that until
+                you can't iterate any more. That type of thing. Developers are
+                conditioned into this structured way of thinking — every
+                decision and LOC should be driven by some fundamental business
+                or technical cause.
+            </p>
+
+            <p>
+                And this is a good thing! Not a particularly profound assessment
+                on my end. We should be working for some practical end most of
+                the time — electricians, lawyers, and veterinarians all need
+                software in the modern world and software developers need to put
+                food on the table. There is also much beauty and purpose to be
+                found in the world of utilitarian things, even in software. But
+                I bring up that earlier point about the joy in having easy,
+                half-baked ideas that go nowhere for a reason: I think,
+                sometimes, simple bad ideas are good.<sup
+                    ><a href="#note1">1</a></sup
+                >
+            </p>
+
+            <p>
+                Again, this is unfortunately not a particularly profound
+                assessment on my end. UX people used to talk about "ideation"
+                all the time, and about how the best way to have a good idea is
+                to have a high volume of ideas while accepting that most of them
+                will be bad.<sup><a href="#note2">2</a></sup> I think this is
+                fair, but I also want to more specifically point two killer
+                features of a bad idea:
+            </p>
+
+            <ol>
+                <li>
+                    Bad ideas are really mentally inexpensive to make. Just
+                    think of the first, worst thing and roll with it.
+                </li>
+                <li>
+                    A bad idea has a built-in timebomb. Working on a bad idea
+                    has the opposite of the feedback loop associated with a good
+                    idea — you will receive no positive feedback, everyone —
+                    including yourself — will question why you would spend 5
+                    more seconds on this idea, and a crushing boredom will
+                    inevitably box you out. In the world of bad ideas, you have
+                    to get in, hold your breath while you do your thing, and get
+                    out. If you’re lucky, you learn something.
+                </li>
+            </ol>
+
+            <hr />
+
+            <p>
+                Since my last startup wound down, I've been
+                <a href="https://www.andy-gallagher.com/resume"
+                    >looking for a good job :-)</a
+                >
+                and it has been pretty easy this go-around trying to figure out
+                what it is that the
+                <a
+                    href="https://www.linkedin.com/jobs/artificial-intelligence-jobs-san-francisco-ca/?currentJobId=4104051312"
+                    >market values right now in the valley</a
+                >. As a product developer, I haven't had much exposure to
+                working with newer AI services and wanted to tread into the
+                murky waters.
+            </p>
+
+            <p>
+                When you're exploring a new technical domain, it can be tricky
+                to figure out what to build beyond the TODO app, because, well,
+                you have no idea what any of this technology can even do.<sup
+                    ><a href="#note3">3</a></sup
+                >
+                You get where this is going — let's roll with our first, worst
+                idea. What am I eating tonight? Chongqing Numbing Spicy Noodles.
+                How am I gonna get it?
+                <a
+                    href="https://github.com/andyGallagher/1800-call-it-in/tree/main"
+                    >You already know what it is playboy</a
+                >
+                — we're going to slam together 9 different AI services<sup
+                    ><a href="#note4">4</a></sup
+                >
+                for $14 of pickup.
+            </p>
+
+            <p>
+                Now I mean, in 2025 taking something that's been done to
+                absolute death (food delivery) but also Now With AI™️ is
+                borderline illegal or should be. But when exploring a new
+                domain, being forced to think quickly, take as many shortcuts as
+                possible, and get something <em>barely</em> working, the
+                confines of an ill-fated venture lend you so much speed and
+                structure. Enums causing some weird Prisma error on your client?
+                Fuck it, covert them to strings. Taking a bit too much time to
+                flesh out a service that can handle different providers? Just
+                write that shit in the route handler. What's the worst that can
+                happen? You don't have to
+                <a
+                    href="https://devblogs.microsoft.com/oldnewthing/20180228-00/?p=98125"
+                    >pay down tech debt if you just blow the thing up</a
+                >.
+            </p>
+
+            <p>
+                And after about 3 days, I was at my absolute limit. I could not
+                bear the thought of putting even one more keystroke towards this
+                repo. But that's good! That's the built-in shutoff kicking in.
+                This was a bad idea, so walking away has always been the
+                smartest thing I could actually do. The repo, without a single
+                fork or star, will unceremoniously decay in cyberspace. It is,
+                at best, a cairn for Python AI/ML devs trying to figure out how
+                to structure a TypeScript application repo. At its worst, it's
+                still fodder for the very machines that power it.
+            </p>
+
+            <hr />
+
+            <ol id="notes">
+                <li id="note1">
+                    Note that it's important to not conflate "bad ideas" with
+                    "side projects", "unproven theories", or just "having
+                    ideas". For our purposes, a "bad idea" is a specific variety
+                    of side project that is not highly aligned with a
+                    developer's personal interests, is not of notable technical
+                    interest, and will not make you any sweet cash. You know
+                    this all ahead of time. It should feel stupid 100% of the
+                    time.
+                </li>
+                <li id="note2">
+                    I am fairly certain that
+                    <a
+                        href="https://www.reddit.com/r/UXDesign/comments/18wzhay/what_is_happening_to_the_ux_market/"
+                        >UX as a field is dead</a
+                    >
+                    post-ZIRP, and has been folded into design. RIP. It is what
+                    it is. Pour one out for Don Norman. That said, I'm relieved
+                    I hear about their concept of "ideation" less and less,
+                    because the phrase is otherwise like, only associated with
+                    suicidal ideation for me. Listening to these guys, it
+                    literally just sounded like they all just wanted to kill
+                    themselves all the time.
+                </li>
+                <li id="note3">
+                    I am aware that "reading about things" or "picking up a
+                    goddamn book" is always on the table, but I personally
+                    believe there is a real threshold where reading becomes less
+                    effective than just punching keys.
+                </li>
+                <li id="note4">
+                    I do want to actually be sincere/serious here and note that
+                    I actually met with Jordan, co-founder of
+                    <a href="https://vapi.ai/">Vapi</a> and he is
+                    <a href="https://jobs.ashbyhq.com/vapi"
+                        >looking for good engineers</a
+                    >. If you want to work incredibly hard and probably make a
+                    LOT of money, you should reach out to him.
+                </li>
+            </ol>
+        </main>
+    </body>
+</html>
