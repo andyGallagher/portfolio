@@ -161,3 +161,7 @@ blockquote {
 code {
     color: darkgreen;
 }
+
+.underline {
+    text-decoration: underline;
+}
