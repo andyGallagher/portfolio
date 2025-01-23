@@ -1,0 +1,160 @@
+<html>
+    <head>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link rel="stylesheet" href="./index.css" />
+        <title>
+            Web Audio Madness: Setting a negative playback rate on an
+            AudioBuffer
+        </title>
+    </head>
+    <body>
+        <main>
+            <strong class="home"
+                ><header><a href="/">Home</a></header></strong
+            >
+            <h2>
+                Web Audio Madness: Setting a negative playback rate on an
+                AudioBuffer
+            </h2>
+
+            <p style="margin: 0">
+                <i>Author:</i>
+                Andrew Gallagher
+            </p>
+            <p style="margin-top: 0">
+                <i>Published at:</i>
+                Jan 23 2025
+            </p>
+
+            <div
+                style="
+                    background-color: lightgray;
+                    padding: 16px;
+                    margin-bottom: 16px;
+                    border: 2px solid gray;
+                    font-style: italic;
+                "
+            >
+                Part of a series on the Web Audio API.
+            </div>
+
+            <div>
+                <strong>Demo:</strong>
+
+                <div
+                    id="app"
+                    style="
+                        background-color: lightgray;
+                        border: 2px solid gray;
+                        padding: 1rem;
+                        position: relative;
+                        margin-bottom: 2rem;
+                    "
+                >
+                    <noscript>
+                        <div
+                            style="
+                                z-index: 3;
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                width: 100%;
+                                height: 100%;
+                                background-color: darkslategray;
+                                backdrop-filter: blur(6px);
+                            "
+                        >
+                            <div
+                                style="background-color: yellow; padding: 1rem"
+                            >
+                                JavaScript is required to run this demo.
+                            </div>
+                        </div>
+                    </noscript>
+                    <div
+                        id="loader"
+                        style="
+                            z-index: 2;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 100%;
+                            height: 100%;
+                            background-color: #2f4f4f4f;
+                            backdrop-filter: blur(2px);
+                        "
+                    >
+                        <button id="load">Click to start</button>
+                    </div>
+
+                    <div>
+                        <div>
+                            Press play audio to begin playback of a drum loop.
+                            <br />
+                            After playback begins, you can adjust the
+                            <code>playbackRate</code>. Putting the
+                            <code>playbackRate</code> in the negative will play
+                            the drum track backwards.
+                        </div>
+
+                        <hr />
+
+                        <div
+                            style="
+                                margin-top: 0.5rem;
+                                border: 1px dashed grey;
+                                padding: 1rem;
+                                width: min-content;
+                            "
+                        >
+                            <label
+                                style="
+                                    display: inline-block;
+                                    text-decoration: underline;
+                                "
+                                for="playbackRate"
+                                ><strong>Playback Rate</strong></label
+                            >
+                            <div style="display: flex; align-items: center">
+                                <span>-2</span>
+                                <input
+                                    style="margin: 1rem 0.5rem"
+                                    type="range"
+                                    id="playbackRate"
+                                    name="reverse"
+                                    min="-2"
+                                    value="1"
+                                    max="2"
+                                    step="0.01"
+                                />
+                                <span>2</span>
+                            </div>
+                            <div>
+                                Current rate: <span id="currentRate">1</span>
+                            </div>
+                        </div>
+
+                        <button
+                            style="margin-top: 1rem; font-style: italic"
+                            disabled
+                            id="play"
+                        >
+                            Loading...
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script type="module" src="/src/main.js"></script>
+    </body>
+</html>
