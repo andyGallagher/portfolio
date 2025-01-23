@@ -101,9 +101,10 @@ section {
 }
 
 .work-item {
+    margin-bottom: 1rem;
     & p {
         &:first-of-type {
-            margin-top: 0.5rem;
+            margin-top: 0rem;
         }
     }
 }
@@ -112,6 +113,10 @@ section {
     margin: 0 0 1rem;
 
     & p {
+        &:first-of-type {
+            margin-top: 0rem;
+        }
+
         &:last-of-type {
             margin-bottom: 0;
         }
