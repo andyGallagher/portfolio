@@ -4,11 +4,15 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <link rel="stylesheet" href="./index.css" />
+        <link rel="stylesheet" href="../../index.css" />
         <title>
-            Web Audio Madness: Setting a negative playback rate on an
-            AudioBuffer
+            Web Audio Madness: (era era era) Setting a negative playback rate on
+            an AudioBufferSourceNode
         </title>
+        <link
+            rel="canonical"
+            href="https://www.andy-gallagher.com/blog/web-audio-madness-negative-playback-rate/"
+        />
     </head>
     <body>
         <main>
@@ -16,8 +20,8 @@
                 ><header><a href="/">Home</a></header></strong
             >
             <h2>
-                Web Audio Madness: Setting a negative playback rate on an
-                AudioBuffer
+                Web Audio Madness: (era <sup>era <sup>era</sup></sup
+                >) Setting a negative playback rate on an AudioBufferSourceNode
             </h2>
 
             <p style="margin: 0">
@@ -29,58 +33,266 @@
                 Jan 23 2025
             </p>
 
+            <p>
+                <em
+                    >This work is now part of the open-source library
+                    <a
+                        href="https://www.npmjs.com/package/simple-reversible-audio-buffer-source-node"
+                        >simple-reversible-audio-buffer-source-node</a
+                    >.</em
+                >
+            </p>
+
+            <hr />
+
+            <p>
+                In the Requirements and Use Cases of the Web Audio API spec,
+                outlined over a decade ago in 2013, the Audio Working Group
+                described the possibility of creating a
+                <a
+                    href="https://www.w3.org/TR/webaudio-usecases/#connected-dj-booth"
+                    >connected DJ booth</a
+                >
+                application. The following DJ workflow is detailed:
+            </p>
+
+            <blockquote>
+                <p>
+                    &hellip;the DJ would be able to quickly select several other
+                    track [sic], play them through headphones without affecting
+                    the main audio output of the application, and match them to
+                    the track currently playing through a mix of pausing,
+                    skipping forward or back and pitch/speed change.
+                </p>
+            </blockquote>
+
+            <p>
+                This is (mostly<sup><a href="#footnote-1">1</a></sup
+                >) possible now! Some parts of this application are relatively
+                straightforward:
+            </p>
+
+            <ul>
+                <li>
+                    manipulating <code>detune</code> and
+                    <code>playbackRate</code> are sufficient for jogging a track
+                    when beatmatching
+                </li>
+                <li>
+                    targeting different audio destinations (e.g. &mdash;
+                    headphones/line out) is possible via
+                    <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/setSinkId"
+                        >setting the sinkId of an <code>AudioContext</code></a
+                    >
+                </li>
+                <li>
+                    there are several ways to pause a piece of audio<sup
+                        ><a href="#footnote-2">2</a></sup
+                    >
+                </li>
+            </ul>
+
+            <p>
+                But one crucial feature of a DJ application that is presently
+                nontrivial to implement is the ability to
+                <em>audibly rewind an audio track</em>. Audibly rewinding a
+                track has two critically important functions for a DJ:
+            </p>
+
+            <ol>
+                <li>
+                    while cueing, the DJ can precisely hear where a
+                    <a href="https://www.youtube.com/watch?v=R9Urjp95Odw"
+                        >cuepoint will start</a
+                    >
+                    without needing to play a track forwards or consult a visual
+                    representation of the audio. Having an accurate and fast way
+                    to define cuepoints is essential for beatmatching as defined
+                    in the spec's use case.
+                </li>
+                <li>
+                    the DJ can perform a
+                    <a
+                        href="https://youtu.be/EFv-F71qLXQ?si=uiLAhxYlur-Gj9qE&t=18"
+                        >spinback</a
+                    >
+                    of the track. In some genres of music, rewinding a track in
+                    this way is
+                    <a
+                        href="https://medium.com/cuepoint/wheel-it-up-history-of-the-rewind-21fdcff243d9"
+                        >an essential transition technique</a
+                    >.
+                </li>
+            </ol>
+
+            <p>
+                The na&iuml;ve approach of setting a negative
+                <code>playbackRate</code> is
+                <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/playbackRate"
+                    >only supported in some WebKit-based browsers</a
+                >, so Chrome users &mdash; 65% of internet traffic &mdash; are
+                out of luck.
+            </p>
+
+            <p>
+                Fortunately, it is possible to implement audible rewind. Like
+                most programming problems, this can be broken up into a set of
+                smaller, simpler problems.
+            </p>
+
+            <hr />
+
+            <h3>High-level overview</h3>
+
+            <p>
+                This work abstracts out a bit more down the line to be an
+                <code>AudioNode</code> that generally supports a negative
+                <code>playbackRate</code>, but for right now we'll specifically
+                work with our little DJ example.
+            </p>
+
+            <p>
+                What we're essentially looking to create is an
+                <code>AudioNode</code> that can generate the
+                <a href="https://www.youtube.com/watch?v=3Lra0087Rac"
+                    >"era era era"</a
+                >
+                sound that is characteristic of DJing. We'll need to have a
+                reversed version of our audio, and we'll want the ability to
+                quickly swap between the forwards and reversed audio. When we
+                swap between forwards and reversed audio, we'll want to be
+                <em>very</em> precise about the start point of the audio that is
+                being swapped in, so that we don't have any audio jank.
+            </p>
+
+            <p>This sets us up for four distinct tasks:</p>
+            <ol>
+                <li>Reversing our forwards audio</li>
+                <li>Accurately tracking playback position of audio</li>
+                <li>Swapping between forwards and reversed audio</li>
+                <li>Putting it all together</li>
+            </ol>
+
+            <h4>1. Reversing our forwards audio</h4>
+
+            <p>
+                Our easiest task is reversing our audio &mdash; of which there
+                are a few different approaches:
+            </p>
+            <ul>
+                <li>outside of the browser with <code>ffmpeg</code></li>
+                <li>
+                    inside our browser or web worker by reversing all channel
+                    data on a decoded <code>AudioBuffer</code
+                    ><sup><a href="#footnote-3">3</a></sup>
+                </li>
+            </ul>
+
+            <p>
+                At a very high level, all digital audio just an array of
+                floating point numbers. We just need to reverse this array.
+            </p>
+
+            <h4>2. Accurately tracking playback position of audio</h4>
+
+            <p>
+                There is not a great, built-in way to track the playback
+                position of an <code>AudioBufferSourceNode</code>. For our DJ
+                application, the typical minimal approach of using
+                <code>audioContext.currentTime</code> to bookend when audio
+                starts and stops would be too imprecise to prevent audio jank
+                and may cause misalignment between our forwards and backwards
+                audio tracks. Besides, detuning and adjusting
+                <code>playbackRate</code> for beatmatching would mean we would
+                have to perform precise math when calculating the amount of time
+                played between these already imprecise bookends.
+            </p>
+
+            <p>
+                Most of the more clever workarounds to this are problem, of
+                course, in
+                <a href="https://github.com/WebAudio/web-audio-api/issues/2397"
+                    >a random GitHub thread</a
+                >. My favorite approach detailed
+                <a
+                    href="https://github.com/WebAudio/web-audio-api/issues/2397#issuecomment-459514360"
+                    >here</a
+                >
+                is to create an additional channel on the
+                <code>AudioBuffer</code>, fill it with the percentage that a
+                channel completed with 0 at the first index and 1 at the last
+                index, and then read from it via an <code>AnalyserNode</code>.
+            </p>
+
+            <p>
+                To elaborate briefly on this, an <code>AudioBuffer</code> is
+                composed of channels of <code>Float32Array</code> representing
+                the amplitudes of an audio signal. There are no rules to what
+                these <code>Float32Array</code>s can actually encode, assuming
+                that the values we put in the array are finite 32-bit
+                floating-point numbers. When we play digital audio, your
+                computer traverses through this array of numbers and translates
+                that into sound. If we have a silent, additional channel that
+                represents playback percentage, we can figure out what this
+                current playback percentage is at a given time by reading from
+                this channel during playback.
+            </p>
+
+            <h4>3. Swapping between forwards and reversed audio</h4>
+
+            <p>
+                Swapping between forwards and backwards audio turns us back into
+                the more straightforward world of good old state management.
+                When our <code>playbackRate</code> is positive, we want our
+                forward node to be playing. When we set our
+                <code>playbackRate</code> to negative, we want our reverse node
+                to be playing. Finally, when we swap between directions, we want
+                to make sure that our nodes times are aligned. The playback
+                position of the reverse node is the complement of the forward
+                node, and vice versa &mdash; as an example: given a 10-second
+                long audio clip, if we are exactly 4 seconds into forwards
+                playback and we move into reverse,
+                <em>we'll want to play the reverse audio from 6 seconds in</em>.
+            </p>
+
+            <p>
+                To handle this swap, we'll override the
+                <code>playbackRate</code> method of an <code>AudioNode</code>.
+                When the amount is negative but our forwards node is currently
+                playing (or vice versa), we swap in the active node with the
+                complementary playback position of the inactive node and pause
+                the inactive node.<sup><a href="#footnote-5">5</a></sup>
+            </p>
+
+            <p>
+                Both nodes could be routed through a
+                <code>ChannelMergerNode</code>, so our exposed interface may
+                just be a single <code>AudioNode</code>.
+            </p>
+
+            <h4>4. Putting it all together</h4>
+
+            <p>
+                After wiring everything together, we're left with something like
+                this demo.<sup><a href="#footnote-6">6</a></sup>
+            </p>
+
             <div
+                id="app"
                 style="
                     background-color: lightgray;
-                    padding: 16px;
-                    margin-bottom: 16px;
                     border: 2px solid gray;
-                    font-style: italic;
+                    padding: 1rem;
+                    position: relative;
+                    margin-bottom: 2rem;
                 "
             >
-                Part of a series on the Web Audio API.
-            </div>
-
-            <div>
-                <strong>Demo:</strong>
-
-                <div
-                    id="app"
-                    style="
-                        background-color: lightgray;
-                        border: 2px solid gray;
-                        padding: 1rem;
-                        position: relative;
-                        margin-bottom: 2rem;
-                    "
-                >
-                    <noscript>
-                        <div
-                            style="
-                                z-index: 3;
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                width: 100%;
-                                height: 100%;
-                                background-color: darkslategray;
-                                backdrop-filter: blur(6px);
-                            "
-                        >
-                            <div
-                                style="background-color: yellow; padding: 1rem"
-                            >
-                                JavaScript is required to run this demo.
-                            </div>
-                        </div>
-                    </noscript>
+                <noscript>
                     <div
-                        id="loader"
                         style="
-                            z-index: 2;
+                            z-index: 3;
                             position: absolute;
                             top: 0;
                             left: 0;
@@ -89,70 +301,145 @@
                             justify-content: center;
                             width: 100%;
                             height: 100%;
-                            background-color: #2f4f4f4f;
-                            backdrop-filter: blur(2px);
+                            background-color: darkslategray;
+                            backdrop-filter: blur(6px);
                         "
                     >
-                        <button id="load">Click to start</button>
+                        <div style="background-color: yellow; padding: 1rem">
+                            JavaScript is required to run this demo.
+                        </div>
                     </div>
+                </noscript>
+                <div
+                    id="loader"
+                    style="
+                        z-index: 2;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 100%;
+                        background-color: #2f4f4f4f;
+                        backdrop-filter: blur(2px);
+                    "
+                >
+                    <button id="load">Click to start</button>
+                </div>
 
+                <div>
                     <div>
-                        <div>
-                            Press play audio to begin playback of a drum loop.
-                            <br />
-                            After playback begins, you can adjust the
-                            <code>playbackRate</code>. Putting the
-                            <code>playbackRate</code> in the negative will play
-                            the drum track backwards.
-                        </div>
-
-                        <hr />
-
-                        <div
-                            style="
-                                margin-top: 0.5rem;
-                                border: 1px dashed grey;
-                                padding: 1rem;
-                                width: min-content;
-                            "
-                        >
-                            <label
-                                style="
-                                    display: inline-block;
-                                    text-decoration: underline;
-                                "
-                                for="playbackRate"
-                                ><strong>Playback Rate</strong></label
-                            >
-                            <div style="display: flex; align-items: center">
-                                <span>-2</span>
-                                <input
-                                    style="margin: 1rem 0.5rem"
-                                    type="range"
-                                    id="playbackRate"
-                                    name="reverse"
-                                    min="-2"
-                                    value="1"
-                                    max="2"
-                                    step="0.01"
-                                />
-                                <span>2</span>
-                            </div>
-                            <div>
-                                Current rate: <span id="currentRate">1</span>
-                            </div>
-                        </div>
-
-                        <button
-                            style="margin-top: 1rem; font-style: italic"
-                            disabled
-                            id="play"
-                        >
-                            Loading...
-                        </button>
+                        Press play audio to begin playback of a drum track.
+                        <br />
+                        Putting the
+                        <code>playbackRate</code> in the negative will play the
+                        drum track backwards.
                     </div>
+
+                    <hr />
+
+                    <div
+                        style="
+                            margin-top: 0.5rem;
+                            border: 1px dashed grey;
+                            padding: 1rem;
+                            width: min-content;
+                        "
+                    >
+                        <label
+                            style="
+                                display: inline-block;
+                                text-decoration: underline;
+                            "
+                            for="playbackRate"
+                            ><strong>Playback Rate</strong></label
+                        >
+                        <div style="display: flex; align-items: center">
+                            <span>-2</span>
+                            <input
+                                style="margin: 1rem 0.5rem"
+                                type="range"
+                                id="playbackRate"
+                                name="reverse"
+                                min="-2"
+                                value="1"
+                                max="2"
+                                step="0.01"
+                            />
+                            <span>2</span>
+                        </div>
+                        <div>Current rate: <span id="currentRate">1</span></div>
+                    </div>
+
+                    <button
+                        style="margin-top: 1rem; font-style: italic"
+                        disabled
+                        id="play"
+                    >
+                        Loading...
+                    </button>
                 </div>
             </div>
+
+            <p>
+                By mapping <code>playbackRate</code> to an interface
+                representing a jog wheel or turntable, a user could rapidly
+                toggle through a track and create that sweet "era era era"
+                sound.
+            </p>
+
+            <hr />
+
+            <ol id="footnotes">
+                <li id="footnote-1">
+                    iOS still does not support having multiple simultaneous
+                    audio outputs, so advice for mobile browser-based DJ
+                    applications
+                    <a href="https://www.algoriddim.com/hardware/precueing"
+                        >is to use a splitter</a
+                    >, which, to me, is ASS.
+                </li>
+                <li id="footnote-2">
+                    Pro tip when you're pausing an
+                    <code>AudioBufferSourceNode</code>s is
+                    <a
+                        href="https://github.com/WebAudio/web-audio-api-v2/issues/105#issuecomment-724089679"
+                        >to set the <code>playbackRate</code> to 0</a
+                    >.
+                </li>
+                <li id="footnote-3">
+                    For an example illustrating how to reverse channel data,
+                    <a
+                        href="https://github.com/andyGallagher/simple-reversible-audio-buffer-source-node/blob/main/lib/src/util.ts#L7"
+                        >see this implementation</a
+                    >.
+                </li>
+                <li id="footnote-4">
+                    For an example of routing a playback percentage channel
+                    through an Analyser,
+                    <a
+                        href="https://github.com/andyGallagher/simple-reversible-audio-buffer-source-node/blob/main/lib/src/playback-position-node.ts#L55"
+                        >see this implementation</a
+                    >.
+                </li>
+                <li id="footnote-5">
+                    For an example of swapping between forwards and reverse
+                    nodes,
+                    <a
+                        href="https://github.com/andyGallagher/simple-reversible-audio-buffer-source-node/blob/main/lib/src/reversible-audio-buffer-source-node.ts"
+                        >see this implementation</a
+                    >.
+                </li>
+                <li id="footnote-6">
+                    For demo source code,
+                    <a
+                        href="https://github.com/andyGallagher/portfolio/blob/master/blog/web-audio-madness-negative-playback-rate/src/main.js"
+                        >refer to this repo</a
+                    >.
+                </li>
+            </ol>
         </main>
 
         <script type="module" src="/src/main.js"></script>

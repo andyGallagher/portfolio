@@ -1,3 +1,8 @@
+/**
+* This is just a dupe of ../../index.css, and is here only for convenience of
+* working with vite in local dev.
+**/
+
 a {
     color: #0000ee;
 }
@@ -60,7 +65,7 @@ h4,
 h5,
 h6 {
     overflow-wrap: break-word;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 }
 
 h1 {
@@ -143,4 +148,16 @@ sup {
      */
     font-size: 0.83em;
     vertical-align: super;
+}
+
+blockquote {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-left: 4px solid #ccc;
+    background-color: #f9f9f9;
+    font-style: italic;
+}
+
+code {
+    color: darkgreen;
 }
