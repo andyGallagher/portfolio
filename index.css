@@ -96,7 +96,7 @@ section {
 .profile {
     width: 55%;
     max-width: 300px;
-    border: 2px solid #000;
+    border: 2px solid lightgray;
     margin: 1rem 0;
 }
 
