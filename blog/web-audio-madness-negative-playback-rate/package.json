@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^6.0.5"
+    "vite": "^6.0.13"
   },
   "dependencies": {
     "simple-reversible-audio-buffer-source-node": "^0.0.3"
