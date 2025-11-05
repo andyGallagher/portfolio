@@ -165,3 +165,7 @@ code {
 .underline {
     text-decoration: underline;
 }
+
+.zoomable-image {
+    transform: scale(2);
+}
