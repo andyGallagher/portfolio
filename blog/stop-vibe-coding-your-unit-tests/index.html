@@ -1,24 +1,5 @@
-<!DOCTYPE            /* Syntax highlighting for code blocks */
-            .code-block {
-                background-color: #f8f8f8;
-                border: 1px solid #e1e1e1;
-                border-radius: 4px;
-                padding: 1rem;
-                margin: 1rem 0;
-                overflow-x: auto;
-                overflow-y: auto;
-                max-height: 300px;
-                font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-                font-size: 0.9em;
-                line-height: 1.4;
-            }
-
-            .code-block code {
-                color: #333;
-                background: none;
-                padding: 0;
-                font-size: inherit;
-            }en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta
             name="viewport"
@@ -88,7 +69,7 @@
         <title>Stop vibe coding your unit tests &mdash; Andy Gallagher</title>
         <meta
             property="og:title"
-            content="Stop vibe coding your unit tests — Andy Gallagher"
+            content="Stop vibe coding your unit tests &mdash; Andy Gallagher"
         />
         <meta
             property="og:description"
@@ -101,7 +82,7 @@
         <meta name="twitter:card" content="summary_large_image" />
         <meta
             name="twitter:title"
-            content="Stop vibe coding your unit tests — Andy Gallagher"
+            content="Stop vibe coding your unit tests &mdash; Andy Gallagher"
         />
         <meta
             name="twitter:description"
@@ -114,7 +95,7 @@
         <meta name="bluesky:card" content="summary_large_image" />
         <meta
             name="bluesky:title"
-            content="Stop vibe coding your unit tests — Andy Gallagher"
+            content="Stop vibe coding your unit tests &mdash; Andy Gallagher"
         />
         <meta
             name="bluesky:description"
@@ -130,7 +111,7 @@
             <strong class="home"
                 ><header><a href="/">Home</a></header></strong
             >
-            <h2>Stop vibe coding your unit tests</h2>
+            <h2>Stop Vibe Coding Your Unit Tests</h2>
 
             <p style="margin: 0">
                 <i>Author:</i>
@@ -138,11 +119,10 @@
             </p>
             <p style="margin-top: 0">
                 <i>Published at:</i>
-                Mon Nov 04 2025
+                Wed Nov 05 2025
             </p>
 
-                        <hr />
-
+            <hr />
 
             <blockquote>
                 A QA engineer walks into a bar and orders a beer.<br /><br />
@@ -154,13 +134,13 @@
                 then ask where the bathroom is. The bar explodes.
             </blockquote>
 
-
             <p>
                 There is a growing sentiment
                 <a
                     href="https://www.assembled.com/blog/why-i-code-as-a-cto#:~:text=Knowing%20where%20AI%20shines%20(crud%2C%20tests%2C%20boilerplate)%20and%20where%20it%20fails%20(precision%2C%20system%20nuance)%20always%20beats%20making%20decisions%20based%20on%20Twitter%20hype"
                     >that LLMs are good for CRUD, boilerplate, and tests</a
-                >. While I am not so sure about how good AI is at making CRUD<sup><a href="#footnote-1">1</a></sup>
+                >. While I am not so sure about how good AI is at making
+                CRUD<sup><a href="#footnote-1">1</a></sup>
                 or thumping out boilerplate, a year of working as an SWE in the
                 modern LLM-powered AI codescape has proven to me that LLMs write
                 unconstructive, noisy, brittle, and downright-bad unit tests.
@@ -192,25 +172,31 @@
 
             <p>
                 You can feel free to chop up the order of these steps as you'd
-                like it<sup><a href="#footnote-2">2</a></sup>. The end result of this process is pretty uniform
-                regardless — a PR with a fuckton of brittle unit tests. I have
-                seen truly excellent developers submit nice code accompanied by
-                nonsense unit tests — the allure and simplicity of this workflow
-                really lets the slop in.
+                like it<sup><a href="#footnote-2">2</a></sup
+                >. The end result of this process is pretty uniform regardless
+                &mdash; a PR with a fuckton of brittle unit tests. I have seen
+                truly excellent developers submit nice code accompanied by
+                nonsense unit tests &mdash; the allure and simplicity of this
+                workflow really lets the slop in.
             </p>
 
             <p>
-                What makes these unit tests so bad<sup><a href="#footnote-3">3</a></sup>? Two things: 1) LLMs write
-                <em>way</em> too many unit tests and 2) the tests are
-                <em>extremely frequently</em> just verifying what the code does,
-                not validating what the code should do.
+                What makes these unit tests so bad<sup
+                    ><a href="#footnote-3">3</a></sup
+                >? Two things: 1) LLMs write <em>way</em> too many unit tests
+                and 2) the tests are <em>extremely frequently</em> just
+                verifying what the code does, not validating what the code
+                should do.
             </p>
 
             <p>
                 Let's concoct a trivial example, say we have the following
                 <code>react</code> component, a button:
             </p>
-            <pre class="code-block" style="overflow-x: auto; overflow-y: auto; max-height: 300px;"><code><span class="keyword">import</span> <span class="keyword">type</span> <span class="punctuation">{</span> <span class="type">ButtonHTMLAttributes</span> <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">"react"</span><span class="punctuation">;</span>
+            <pre
+                class="code-block"
+                style="overflow-x: auto; overflow-y: auto; max-height: 300px"
+            ><code><span class="keyword">import</span> <span class="keyword">type</span> <span class="punctuation">{</span> <span class="type">ButtonHTMLAttributes</span> <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">"react"</span><span class="punctuation">;</span>
 
 <span class="keyword">interface</span> <span class="type">ButtonProps</span> <span class="keyword">extends</span> <span class="type">ButtonHTMLAttributes</span><span class="operator">&lt;</span><span class="type">HTMLButtonElement</span><span class="operator">&gt;</span> <span class="punctuation">{</span>
   <span class="property">children</span><span class="operator">?</span><span class="punctuation">:</span> <span class="type">React.ReactNode</span><span class="punctuation">;</span>
@@ -268,30 +254,32 @@
                     >Look no further!</a
                 >
                 Claude outputs ~30 tests pretty much every time, at around ~200
-                LOC on average<sup><a href="#footnote-4">4</a></sup>. We test interesting things like: "should
-                renders" and "does render with props". Why would "render" be
-                your responsibility, as opposed to the
-                <code>react</code> teams'? And do you have any idea how totally
-                fucked the entire web would be if rendering a basic button
-                failed?
+                LOC on average<sup><a href="#footnote-4">4</a></sup
+                >. We test interesting things like: "should renders" and "does
+                render with props". Why would "render" be your responsibility,
+                as opposed to the <code>react</code> team's? And do you have any
+                idea how totally fucked the entire web would be if rendering a
+                basic button failed?
             </p>
 
             <p>
                 LLMs also appear to biased to give users a direct answer instead
-                of asking clarifying questions<sup><a href="#footnote-5">5</a></sup>. This is loaded a statement
-                and probably obvious given my prompt, but Claude never returns
-                to ask "what should I test". Rather, the LLM just verifies
-                <em>everything</em>.
+                of asking clarifying questions<sup
+                    ><a href="#footnote-5">5</a></sup
+                >. This is a loaded statement and probably obvious given my
+                prompt, but Claude never returns to ask "what should I test".
+                Rather, the LLM just verifies <em>everything</em>.
             </p>
 
             <p>
-                To me these unit tests are worse than nothing — all that they do
-                is lock in this button. But we are told as developers that we
-                should write unit tests, and that we should strive for X%
-                coverage. We now have LLMs at our disposal to make writing unit
-                tests feel like an afterthought — and in this, actually
+                To me these unit tests are worse than nothing &mdash; all that
+                they do is lock in this button. But we are told as developers
+                that we should write unit tests, and that we should strive for
+                X% coverage. We now have LLMs at our disposal to make writing
+                unit tests feel like an afterthought &mdash; and in this,
+                actually
                 <em>be an afterthought</em>. But psychologically, it feels good
-                — and everybody else seems to be doing it.
+                &mdash; and everybody else seems to be doing it.
             </p>
 
             <hr />
@@ -299,8 +287,8 @@
             <p>
                 So why not just embrace it and ride upon the mighty slop wave?
                 There are some cases where you can actually reasonably one-shot
-                tests for a leetcode-y big brain problem. I would actually say —
-                in total honesty — that I feel that LLMs are
+                tests for a leetcode-y big brain problem. I would actually say
+                &mdash; in total honesty &mdash; that I feel that LLMs are
                 <em>definitely</em> far better than human developers when it
                 comes to writing comprehensive and meaningful tests for highly
                 abstract code. Conveniently,
@@ -316,8 +304,8 @@
                 spend most of my time writing product code, and the hard work of
                 verification is often outsourced to my dependencies. Most of the
                 time, I am writing tests that validate that I am building the
-                right thing — if a test fails, it represents that what we are
-                building has diverged from our intentions.
+                right thing &mdash; if a test fails, it represents that what we
+                are building has diverged from our intentions.
             </p>
 
             <p>
@@ -332,7 +320,8 @@
 
             <p>
                 For humans, writing a ton of bad unit tests has many
-                <em>far worse</em> downsides. First — and most importantly —
+                <em>far worse</em> downsides. First &mdash; and most importantly
+                &mdash;
                 <a
                     href="https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity"
                     >your coworkers will hate you</a
@@ -348,19 +337,20 @@
 
             <p>
                 I am still a firm believer that the cat is out of the bag in
-                terms of agentic coding — things are probably not going to
+                terms of agentic coding &mdash; things are probably not going to
                 change any time soon. Besides, working with Cursor has been one
                 of the most interesting parts of 2025 for me.
             </p>
 
             <p>
                 And there is still an effective technique to write unit tests
-                with agentic coding — it's just unfortunately not very easy, nor
-                as pleasant as asking Claude to "write unit test". When making
-                tests, write them <em>one at a time</em>. Ask your agent
-                specifically what you'd like to test, and verify that the agent
-                has written something that makes sense. Like any other piece of
-                software, keep it focused, keep it brief, and mind every line.
+                with agentic coding &mdash; it's just unfortunately not very
+                easy, nor as pleasant as asking Claude to "write unit test".
+                When making tests, write them <em>one at a time</em>. Ask your
+                agent specifically what you'd like to test, and verify that the
+                agent has written something that makes sense. Like any other
+                piece of software, keep it focused, keep it brief, and mind
+                every line.
             </p>
 
             <blockquote>"Less is more."</blockquote>
@@ -369,11 +359,11 @@
 
             <ol id="footnotes">
                 <li id="footnote-1">
-                    I think that software complexity has significantly
-                    ballooned over the past 10 years, and the job of making
-                    simple CRUD just doesn't exist any more. We just model the
-                    intricacies of the world more closely with software now. (I
-                    also attribute the decline of Rails a bit to this)
+                    I think that software complexity has significantly ballooned
+                    over the past 10 years, and the job of making simple CRUD
+                    just doesn't exist any more. We just model the intricacies
+                    of the world more closely with software now. (I also
+                    attribute the decline of Rails a bit to this)
                 </li>
                 <li id="footnote-2">
                     The good people at Anthropic
@@ -393,8 +383,8 @@
                     tests because historically developers have so often skipped
                     writing them; effective unit tests may just not be
                     proportionally represented in LLM training data. But take
-                    this with a grain of salt — I don't actually know how LLMs
-                    actually work!
+                    this with a grain of salt &mdash; I don't actually know how
+                    LLMs actually work!
                 </li>
                 <li id="footnote-4">
                     Yeah, sample size of 10 but you catch my drift.
