@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link rel="stylesheet" href="../../index.css" />
+
+        <link
+            rel="canonical"
+            href="https://www.andy-gallagher.com/blog/stop-vibe-coding-your-unit-tests/"
+        />
+        <title>Stop vibe coding your unit tests &mdash; Andy Gallagher</title>
+        <meta
+            property="og:title"
+            content="Stop vibe coding your unit tests — Andy Gallagher"
+        />
+        <meta
+            property="og:description"
+            content="Don't write noisy, unconstructive unit tests with LLMs"
+        />
+        <meta
+            property="og:url"
+            content="https://www.andy-gallagher.com/blog/stop-vibe-coding-your-unit-tests/"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Stop vibe coding your unit tests — Andy Gallagher"
+        />
+        <meta
+            name="twitter:description"
+            content="Don't write noisy, unconstructive unit tests with LLMs"
+        />
+        <meta
+            name="twitter:url"
+            content="https://www.andy-gallagher.com/blog/stop-vibe-coding-your-unit-tests/"
+        />
+        <meta name="bluesky:card" content="summary_large_image" />
+        <meta
+            name="bluesky:title"
+            content="Stop vibe coding your unit tests — Andy Gallagher"
+        />
+        <meta
+            name="bluesky:description"
+            content="Don't write noisy, unconstructive unit tests with LLMs"
+        />
+        <meta
+            name="bluesky:url"
+            content="https://www.andy-gallagher.com/blog/stop-vibe-coding-your-unit-tests/"
+        />
+        <title>Stop vibe coding your unit tests</title>
+    </head>
+    <body>
+        <h1>Stop vibe coding your unit tests</h1>
+
+        <pre><code>A QA engineer walks into a bar and orders a beer.
+She orders 2 beers.
+She orders 0 beers.
+She orders -1 beers.
+She orders a lizard.
+She orders a NULLPTR.
+She tries to leave without paying.
+
+Satisfied, she declares the bar ready for business. The first customer comes in an orders a beer. They finish their drink, and then ask where the bathroom is.
+
+The bar explodes.</code></pre>
+
+        <hr />
+
+        <p>
+            There is a growing sentiment
+            <a
+                href="https://www.assembled.com/blog/why-i-code-as-a-cto#:~:text=Knowing%20where%20AI%20shines%20(crud%2C%20tests%2C%20boilerplate)%20and%20where%20it%20fails%20(precision%2C%20system%20nuance)%20always%20beats%20making%20decisions%20based%20on%20Twitter%20hype"
+                >that LLMs are good for CRUD, boilerplate, and tests</a
+            >. While I am not so sure about how good AI is at making CRUD[0] or
+            thumping out boilerplate, a year of working as an SWE in the modern
+            LLM-powered AI codescape has proven to me that LLMs write
+            unconstructive, noisy, brittle, and downright-bad unit tests. Please
+            do not vibe code your unit tests.
+        </p>
+
+        <hr />
+
+        <p>
+            When generating new software functionality, a common modern workflow
+            I have seen amongst my peer developers looks something like this:
+        </p>
+        <ul>
+            <li>Ask your agent to write up some code</li>
+            <li>Ask your agent to cook up some unit tests</li>
+            <li>
+                Ask your agent to write up some documentation (e.g. a
+                <code>README.md</code> or something), to describe the outputted
+                code in human language
+            </li>
+            <li>
+                Iterate against your code. On iteration, instruct your agent to
+                update both the documentation and the unit tests.
+            </li>
+            <li>Clean and dial in your output</li>
+            <li>Submit a PR</li>
+        </ul>
+
+        <p>
+            You can feel free to chop up the order of these steps as you'd like
+            it[1]. The end result of this process is pretty uniform regardless —
+            a PR with a fuckton of brittle unit tests. I have seen truly
+            excellent developers submit nice code accompanied by nonsense unit
+            tests — the allure and simplicity of this workflow really lets the
+            slop in.
+        </p>
+
+        <p>
+            What makes these unit tests so bad[2]? Two things: 1) LLMs write
+            <em>way</em> too many unit tests and 2) the tests are
+            <em>extremely frequently</em> just verifying what the code does, not
+            validating what the code should do.
+        </p>
+
+        <p>
+            Let's concoct a trivial example, say we have the following
+            <code>react</code> component, a button:
+        </p>
+        <pre><code>import  type { ButtonHTMLAttributes } from  "react";
+
+interface  ButtonProps  extends  ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
+  children?:  React.ReactNode;
+  variant?:  "primary"  |  "secondary"  |  "danger";
+  size?:  "small"  |  "medium"  |  "large";
+}
+
+export  const  Button  = ({
+  children  =  "Click Me",
+  variant  =  "primary",
+  size  =  "medium",
+  className  =  "",
+  ...props
+}:  ButtonProps) =&gt; {
+  const  baseClasses  =  "btn";
+  const  variantClasses  = {
+    primary:  "btn-primary",
+    secondary:  "btn-secondary",
+    danger:  "btn-danger",
+	};
+
+  const  sizeClasses  = {
+    small:  "btn-sm",
+    medium:  "btn-md",
+    large:  "btn-lg",
+  };
+
+  const  classes  = [
+    baseClasses,
+    variantClasses[variant],
+    sizeClasses[size],
+    className,
+  ]
+  .filter(Boolean)
+  .join("  ");
+
+  return (
+    &lt;button  className={classes} {...props}&gt;
+      {children}
+    &lt;/button&gt;
+  );
+};</code></pre>
+
+        <p>
+            What do you think the LLM will output when we instruct it to write
+            some unit tests for us? Imagine a prompt along the lines of
+            <code>"Can you write some unit tests for this button?"</code>
+        </p>
+
+        <p>
+            Curious what Claude Sonnet 4 might spit out?
+            <a
+                href="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_sF3VWwVUm-EKEJ7OVljUYPSoi3DIC3WbYQFoWZ-SnOBnctHJ0mNMUu6IGApLokIN53AB0SMMMsMI/pubhtml"
+                >Look no further!</a
+            >
+            Claude outputs ~30 tests pretty much every time, at around ~200 LOC
+            on average[3]. We test interesting things like: "should renders" and
+            "does render with props". Why would "render" be your responsibility,
+            as opposed to the <code>react</code> teams'? And do you have any
+            idea how totally fucked the entire web would be if rendering a basic
+            button failed?
+        </p>
+
+        <p>
+            LLMs also appear to biased to give users a direct answer instead of
+            asking clarifying questions[4]. This is loaded a statement and
+            probably obvious given my prompt, but Claude never returns to ask
+            "what should I test". Rather, the LLM just verifies
+            <em>everything</em>.
+        </p>
+
+        <p>
+            To me these unit tests are worse than nothing — all that they do is
+            lock in this button. But we are told as developers that we should
+            write unit tests, and that we should strive for X% coverage. We now
+            have LLMs at our disposal to make writing unit tests feel like an
+            afterthought — and in this, actually <em>be an afterthought</em>.
+            But psychologically, it feels good — and everybody else seems to be
+            doing it.
+        </p>
+
+        <hr />
+
+        <p>
+            So why not just embrace it and ride upon the mighty slop wave? There
+            are some cases where you can actually reasonably one-shot tests for
+            a leetcode-y big brain problem. I would actually say — in total
+            honesty — that I feel that LLMs are <em>definitely</em> far better
+            than human developers when it comes to writing comprehensive and
+            meaningful tests for highly abstract code. Conveniently,
+            <a href="https://arxiv.org/abs/2407.21579"
+                >empirical research agrees with my sentiment</a
+            >.
+        </p>
+
+        <p>
+            The problem with this is that I have never in my life been paid to
+            write interesting, abstract leetcode-y big brain code. Odds are good
+            that if you are reading this, you haven't either. I spend most of my
+            time writing product code, and the hard work of verification is
+            often outsourced to my dependencies. Most of the time, I am writing
+            tests that validate that I am building the right thing — if a test
+            fails, it represents that what we are building has diverged from our
+            intentions.
+        </p>
+
+        <p>
+            For your agent, writing a ton of bad unit tests has some pretty
+            serious downsides. When you slop it up, you crowd out proper tests
+            and pollute the semantic search for your agent. Additionally, these
+            bloated spec files consume valuable context window space. Worse yet,
+            large files tend to rank highly in semantic searches, so you will
+            also run into these prior degradations more frequently.
+        </p>
+
+        <p>
+            For humans, writing a ton of bad unit tests has many
+            <em>far worse</em> downsides. First — and most importantly —
+            <a
+                href="https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity"
+                >your coworkers will hate you</a
+            >
+            for opening yet another brittle 4,000 line PR. Second, when you are
+            just verifying what code <em>does</em>, all updates to code will by
+            nature be accompanied by an adjustment to a unit test. Finally, when
+            you have a bazillion brittle unit tests covering said code, you'll
+            just have to update <em>more</em> unit tests.
+        </p>
+
+        <hr />
+
+        <p>
+            I am still a firm believer that the cat is out of the bag in terms
+            of agentic coding — things are probably not going to change any time
+            soon. Besides, working with Cursor has been one of the most
+            interesting parts of 2025 for me.
+        </p>
+
+        <p>
+            And there is still an effective technique to write unit tests with
+            agentic coding — it's just unfortunately not very easy, nor as
+            pleasant as asking Claude to "write unit test". When making tests,
+            write them <em>one at a time</em>. Ask your agent specifically what
+            you'd like to test, and verify that the agent has written something
+            that makes sense. Like any other piece of software, keep it focused,
+            keep it brief, and mind every line.
+        </p>
+
+        <p>A final reminder:</p>
+        <pre><code>"Less is more."</code></pre>
+
+        <hr />
+
+        <p>
+            [0] — I think that software complexity has significantly ballooned
+            over the past 10 years, and the job of making simple CRUD just
+            doesn't exist any more. We just model the intricacies of the world
+            more closely with software now. (I also attribute the decline of
+            Rails a bit to this)<br />
+            [1] — The good people at Anthropic
+            <a
+                href="https://www.anthropic.com/engineering/claude-code-best-practices#:~:text=b.%20Write%20tests%2C%20commit%3B%20code%2C%20iterate%2C%20commit"
+                >recommend writing your unit tests first</a
+            >. I personally find the concept of doing
+            TDD-in-2025-but-this-time-it-is-different-because-we-have-AI-now to
+            be darkly funny,
+            <a
+                href="https://webclips.jskherman.com/snapshots/The%20Grug%20Brained%20Developer%20-%20grugbrain.dev%20(2024-04-23T15_27_57.341Z)#:~:text=unfortunately%20also%20many%20test%20shamans%20exist.%20some%20test%20shaman%20make%20test%20idol%2C%20demand%20things%20like%20%22first%20test%22%20before%20grug%20even%20write%20code%20or%20have%20any%20idea%20what%20grug%20doing%20domain!"
+                >but that's another story</a
+            >.<br />
+            [2] — I also have a hunch that LLMs are maybe bad at writing unit
+            tests because historically developers have so often skipped writing
+            them; effective unit tests may just not be proportionally
+            represented in LLM training data. But take this with a grain of salt
+            — I don't actually know how LLMs actually work!<br />
+            [3] — Yeah, sample size of 10 but you catch my drift.<br />
+            [4] — I would love to know if this is provably true?
+        </p>
+    </body>
+</html>
