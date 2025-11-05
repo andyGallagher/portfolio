@@ -1,11 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE            /* Syntax highlighting for code blocks */
+            .code-block {
+                background-color: #f8f8f8;
+                border: 1px solid #e1e1e1;
+                border-radius: 4px;
+                padding: 1rem;
+                margin: 1rem 0;
+                overflow-x: auto;
+                overflow-y: auto;
+                max-height: 300px;
+                font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+                font-size: 0.9em;
+                line-height: 1.4;
+            }
+
+            .code-block code {
+                color: #333;
+                background: none;
+                padding: 0;
+                font-size: inherit;
+            }en">
     <head>
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <link rel="stylesheet" href="../../index.css" />
+        <style>
+            /* Syntax highlighting for code blocks */
+            .code-block {
+                background-color: #f8f8f8;
+                border: 1px solid #e1e1e1;
+                border-radius: 4px;
+                padding: 1rem;
+                margin: 1rem 0;
+                overflow-x: auto;
+                font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+                font-size: 0.9em;
+                line-height: 1.4;
+            }
+
+            .code-block code {
+                color: #333;
+                background: none;
+                padding: 0;
+                font-size: inherit;
+            }
+
+            /* TypeScript syntax highlighting */
+            .keyword {
+                color: #0070f3;
+                font-weight: bold;
+            }
+            .type {
+                color: #267f99;
+            }
+            .string {
+                color: #032f62;
+            }
+            .comment {
+                color: #6a737d;
+                font-style: italic;
+            }
+            .function {
+                color: #6f42c1;
+            }
+            .property {
+                color: #005cc5;
+            }
+            .operator {
+                color: #d73a49;
+            }
+            .punctuation {
+                color: #24292e;
+            }
+            .variable {
+                color: #e36209;
+            }
+            .number {
+                color: #005cc5;
+            }
+        </style>
 
         <link
             rel="canonical"
@@ -67,6 +141,9 @@
                 Mon Nov 04 2025
             </p>
 
+                        <hr />
+
+
             <blockquote>
                 A QA engineer walks into a bar and orders a beer.<br /><br />
                 She orders 2 beers.<br />She orders 0 beers.<br />She orders -1
@@ -77,7 +154,6 @@
                 then ask where the bathroom is. The bar explodes.
             </blockquote>
 
-            <hr />
 
             <p>
                 There is a growing sentiment
@@ -134,49 +210,49 @@
                 Let's concoct a trivial example, say we have the following
                 <code>react</code> component, a button:
             </p>
-            <pre><code>import  type { ButtonHTMLAttributes } from  "react";
+            <pre class="code-block" style="overflow-x: auto; overflow-y: auto; max-height: 300px;"><code><span class="keyword">import</span> <span class="keyword">type</span> <span class="punctuation">{</span> <span class="type">ButtonHTMLAttributes</span> <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">"react"</span><span class="punctuation">;</span>
 
-interface  ButtonProps  extends  ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
-  children?:  React.ReactNode;
-  variant?:  "primary"  |  "secondary"  |  "danger";
-  size?:  "small"  |  "medium"  |  "large";
-}
+<span class="keyword">interface</span> <span class="type">ButtonProps</span> <span class="keyword">extends</span> <span class="type">ButtonHTMLAttributes</span><span class="operator">&lt;</span><span class="type">HTMLButtonElement</span><span class="operator">&gt;</span> <span class="punctuation">{</span>
+  <span class="property">children</span><span class="operator">?</span><span class="punctuation">:</span> <span class="type">React.ReactNode</span><span class="punctuation">;</span>
+  <span class="property">variant</span><span class="operator">?</span><span class="punctuation">:</span> <span class="string">"primary"</span> <span class="operator">|</span> <span class="string">"secondary"</span> <span class="operator">|</span> <span class="string">"danger"</span><span class="punctuation">;</span>
+  <span class="property">size</span><span class="operator">?</span><span class="punctuation">:</span> <span class="string">"small"</span> <span class="operator">|</span> <span class="string">"medium"</span> <span class="operator">|</span> <span class="string">"large"</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
 
-export  const  Button  = ({
-  children  =  "Click Me",
-  variant  =  "primary",
-  size  =  "medium",
-  className  =  "",
-  ...props
-}:  ButtonProps) =&gt; {
-  const  baseClasses  =  "btn";
-  const  variantClasses  = {
-    primary:  "btn-primary",
-    secondary:  "btn-secondary",
-    danger:  "btn-danger",
-	};
+<span class="keyword">export</span> <span class="keyword">const</span> <span class="variable">Button</span> <span class="operator">=</span> <span class="punctuation">({</span>
+  <span class="property">children</span> <span class="operator">=</span> <span class="string">"Click Me"</span><span class="punctuation">,</span>
+  <span class="property">variant</span> <span class="operator">=</span> <span class="string">"primary"</span><span class="punctuation">,</span>
+  <span class="property">size</span> <span class="operator">=</span> <span class="string">"medium"</span><span class="punctuation">,</span>
+  <span class="property">className</span> <span class="operator">=</span> <span class="string">""</span><span class="punctuation">,</span>
+  <span class="operator">...</span><span class="property">props</span>
+<span class="punctuation">}</span><span class="punctuation">:</span> <span class="type">ButtonProps</span><span class="punctuation">)</span> <span class="operator">=&gt;</span> <span class="punctuation">{</span>
+  <span class="keyword">const</span> <span class="variable">baseClasses</span> <span class="operator">=</span> <span class="string">"btn"</span><span class="punctuation">;</span>
+  <span class="keyword">const</span> <span class="variable">variantClasses</span> <span class="operator">=</span> <span class="punctuation">{</span>
+    <span class="property">primary</span><span class="punctuation">:</span> <span class="string">"btn-primary"</span><span class="punctuation">,</span>
+    <span class="property">secondary</span><span class="punctuation">:</span> <span class="string">"btn-secondary"</span><span class="punctuation">,</span>
+    <span class="property">danger</span><span class="punctuation">:</span> <span class="string">"btn-danger"</span><span class="punctuation">,</span>
+  <span class="punctuation">};</span>
 
-  const  sizeClasses  = {
-    small:  "btn-sm",
-    medium:  "btn-md",
-    large:  "btn-lg",
-  };
+  <span class="keyword">const</span> <span class="variable">sizeClasses</span> <span class="operator">=</span> <span class="punctuation">{</span>
+    <span class="property">small</span><span class="punctuation">:</span> <span class="string">"btn-sm"</span><span class="punctuation">,</span>
+    <span class="property">medium</span><span class="punctuation">:</span> <span class="string">"btn-md"</span><span class="punctuation">,</span>
+    <span class="property">large</span><span class="punctuation">:</span> <span class="string">"btn-lg"</span><span class="punctuation">,</span>
+  <span class="punctuation">};</span>
 
-  const  classes  = [
-    baseClasses,
-    variantClasses[variant],
-    sizeClasses[size],
-    className,
-  ]
-  .filter(Boolean)
-  .join("  ");
+  <span class="keyword">const</span> <span class="variable">classes</span> <span class="operator">=</span> <span class="punctuation">[</span>
+    <span class="variable">baseClasses</span><span class="punctuation">,</span>
+    <span class="variable">variantClasses</span><span class="punctuation">[</span><span class="variable">variant</span><span class="punctuation">]</span><span class="punctuation">,</span>
+    <span class="variable">sizeClasses</span><span class="punctuation">[</span><span class="variable">size</span><span class="punctuation">]</span><span class="punctuation">,</span>
+    <span class="variable">className</span><span class="punctuation">,</span>
+  <span class="punctuation">]</span>
+  <span class="punctuation">.</span><span class="function">filter</span><span class="punctuation">(</span><span class="type">Boolean</span><span class="punctuation">)</span>
+  <span class="punctuation">.</span><span class="function">join</span><span class="punctuation">(</span><span class="string">"  "</span><span class="punctuation">)</span><span class="punctuation">;</span>
 
-  return (
-    &lt;button  className={classes} {...props}&gt;
-      {children}
-    &lt;/button&gt;
-  );
-};</code></pre>
+  <span class="keyword">return</span> <span class="punctuation">(</span>
+    <span class="operator">&lt;</span><span class="keyword">button</span> <span class="property">className</span><span class="operator">=</span><span class="punctuation">{</span><span class="variable">classes</span><span class="punctuation">}</span> <span class="punctuation">{</span><span class="operator">...</span><span class="property">props</span><span class="punctuation">}</span><span class="operator">&gt;</span>
+      <span class="punctuation">{</span><span class="variable">children</span><span class="punctuation">}</span>
+    <span class="operator">&lt;/</span><span class="keyword">button</span><span class="operator">&gt;</span>
+  <span class="punctuation">)</span><span class="punctuation">;</span>
+<span class="punctuation">};</span></code></pre>
 
             <p>
                 What do you think the LLM will output when we instruct it to
