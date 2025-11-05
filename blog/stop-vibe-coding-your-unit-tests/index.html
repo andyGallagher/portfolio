@@ -160,7 +160,7 @@
                 <a
                     href="https://www.assembled.com/blog/why-i-code-as-a-cto#:~:text=Knowing%20where%20AI%20shines%20(crud%2C%20tests%2C%20boilerplate)%20and%20where%20it%20fails%20(precision%2C%20system%20nuance)%20always%20beats%20making%20decisions%20based%20on%20Twitter%20hype"
                     >that LLMs are good for CRUD, boilerplate, and tests</a
-                >. While I am not so sure about how good AI is at making CRUD[0]
+                >. While I am not so sure about how good AI is at making CRUD<sup><a href="#footnote-1">1</a></sup>
                 or thumping out boilerplate, a year of working as an SWE in the
                 modern LLM-powered AI codescape has proven to me that LLMs write
                 unconstructive, noisy, brittle, and downright-bad unit tests.
@@ -192,7 +192,7 @@
 
             <p>
                 You can feel free to chop up the order of these steps as you'd
-                like it[1]. The end result of this process is pretty uniform
+                like it<sup><a href="#footnote-2">2</a></sup>. The end result of this process is pretty uniform
                 regardless — a PR with a fuckton of brittle unit tests. I have
                 seen truly excellent developers submit nice code accompanied by
                 nonsense unit tests — the allure and simplicity of this workflow
@@ -200,7 +200,7 @@
             </p>
 
             <p>
-                What makes these unit tests so bad[2]? Two things: 1) LLMs write
+                What makes these unit tests so bad<sup><a href="#footnote-3">3</a></sup>? Two things: 1) LLMs write
                 <em>way</em> too many unit tests and 2) the tests are
                 <em>extremely frequently</em> just verifying what the code does,
                 not validating what the code should do.
@@ -268,7 +268,7 @@
                     >Look no further!</a
                 >
                 Claude outputs ~30 tests pretty much every time, at around ~200
-                LOC on average[3]. We test interesting things like: "should
+                LOC on average<sup><a href="#footnote-4">4</a></sup>. We test interesting things like: "should
                 renders" and "does render with props". Why would "render" be
                 your responsibility, as opposed to the
                 <code>react</code> teams'? And do you have any idea how totally
@@ -278,7 +278,7 @@
 
             <p>
                 LLMs also appear to biased to give users a direct answer instead
-                of asking clarifying questions[4]. This is loaded a statement
+                of asking clarifying questions<sup><a href="#footnote-5">5</a></sup>. This is loaded a statement
                 and probably obvious given my prompt, but Claude never returns
                 to ask "what should I test". Rather, the LLM just verifies
                 <em>everything</em>.
@@ -363,37 +363,46 @@
                 software, keep it focused, keep it brief, and mind every line.
             </p>
 
-            <p>A final reminder:</p>
-            <pre><code>"Less is more."</code></pre>
+            <blockquote>"Less is more."</blockquote>
 
             <hr />
 
-            <p>
-                [0] — I think that software complexity has significantly
-                ballooned over the past 10 years, and the job of making simple
-                CRUD just doesn't exist any more. We just model the intricacies
-                of the world more closely with software now. (I also attribute
-                the decline of Rails a bit to this)<br />
-                [1] — The good people at Anthropic
-                <a
-                    href="https://www.anthropic.com/engineering/claude-code-best-practices#:~:text=b.%20Write%20tests%2C%20commit%3B%20code%2C%20iterate%2C%20commit"
-                    >recommend writing your unit tests first</a
-                >. I personally find the concept of doing
-                TDD-in-2025-but-this-time-it-is-different-because-we-have-AI-now
-                to be darkly funny,
-                <a
-                    href="https://webclips.jskherman.com/snapshots/The%20Grug%20Brained%20Developer%20-%20grugbrain.dev%20(2024-04-23T15_27_57.341Z)#:~:text=unfortunately%20also%20many%20test%20shamans%20exist.%20some%20test%20shaman%20make%20test%20idol%2C%20demand%20things%20like%20%22first%20test%22%20before%20grug%20even%20write%20code%20or%20have%20any%20idea%20what%20grug%20doing%20domain!"
-                    >but that's another story</a
-                >.<br />
-                [2] — I also have a hunch that LLMs are maybe bad at writing
-                unit tests because historically developers have so often skipped
-                writing them; effective unit tests may just not be
-                proportionally represented in LLM training data. But take this
-                with a grain of salt — I don't actually know how LLMs actually
-                work!<br />
-                [3] — Yeah, sample size of 10 but you catch my drift.<br />
-                [4] — I would love to know if this is provably true?
-            </p>
+            <ol id="footnotes">
+                <li id="footnote-1">
+                    I think that software complexity has significantly
+                    ballooned over the past 10 years, and the job of making
+                    simple CRUD just doesn't exist any more. We just model the
+                    intricacies of the world more closely with software now. (I
+                    also attribute the decline of Rails a bit to this)
+                </li>
+                <li id="footnote-2">
+                    The good people at Anthropic
+                    <a
+                        href="https://www.anthropic.com/engineering/claude-code-best-practices#:~:text=b.%20Write%20tests%2C%20commit%3B%20code%2C%20iterate%2C%20commit"
+                        >recommend writing your unit tests first</a
+                    >. I personally find the concept of doing
+                    TDD-in-2025-but-this-time-it-is-different-because-we-have-AI-now
+                    to be darkly funny,
+                    <a
+                        href="https://webclips.jskherman.com/snapshots/The%20Grug%20Brained%20Developer%20-%20grugbrain.dev%20(2024-04-23T15_27_57.341Z)#:~:text=unfortunately%20also%20many%20test%20shamans%20exist.%20some%20test%20shaman%20make%20test%20idol%2C%20demand%20things%20like%20%22first%20test%22%20before%20grug%20even%20write%20code%20or%20have%20any%20idea%20what%20grug%20doing%20domain!"
+                        >but that's another story</a
+                    >.
+                </li>
+                <li id="footnote-3">
+                    I also have a hunch that LLMs are maybe bad at writing unit
+                    tests because historically developers have so often skipped
+                    writing them; effective unit tests may just not be
+                    proportionally represented in LLM training data. But take
+                    this with a grain of salt — I don't actually know how LLMs
+                    actually work!
+                </li>
+                <li id="footnote-4">
+                    Yeah, sample size of 10 but you catch my drift.
+                </li>
+                <li id="footnote-5">
+                    I would love to know if this is provably true?
+                </li>
+            </ol>
         </main>
     </body>
 </html>
